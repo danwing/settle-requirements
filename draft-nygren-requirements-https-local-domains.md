@@ -65,6 +65,21 @@ informative:
      date: 2022
      target: https://github.com/hallambaker/Mathematical-Mesh
 
+  iotops-suib:
+     title: "SUIB: Browsing local web resources in a secure usable manner"
+     author:
+       -
+         name: Jan Geertsma
+       -
+         name: Christian Amsüss
+       -
+         name: Micheal Richardson
+       -
+         name: Nick Allott
+     date: November 2021
+     ann: "Presentation of IOT Security Foundation SUIB to IETF112 IOTOPS working group"
+     target: https://datatracker.ietf.org/meeting/112/materials/slides-112-iotops-suib-browsing-local-web-resources-in-a-secure-usable-manner-iot-device-configuration-as-a-special-case-00.pdf
+
 
 --- abstract
 
@@ -147,6 +162,8 @@ vulnerabilities that it tries to address
 DHCP domain-search value??  Should we also allow any arbitrary name if
 the IP address is local (RFC1918 address), too?
 
+1. MUST NOT require ongoing vendor support or function, as vendors go
+out of business or lose interest in old equipment
 
 ## Human Factors Requirements
 
@@ -230,7 +247,7 @@ secure association rooted in the connection that sent it:
 
 {{phb-mesh}}
 
-
+{{iotops-suib}}
 
 # Security Considerations
 
