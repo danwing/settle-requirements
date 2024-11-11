@@ -176,6 +176,10 @@ the IP address is local (RFC1918 address), too?
 1. MUST NOT require ongoing vendor support or function, as vendors go
 out of business or lose interest in old equipment
 
+1. Device reset-to-factory settings MUST NOT require initial vendor
+support, as vendors go out of business or lose interest in old
+equipment.
+
 ## Human Factors Requirements
 
 1. SHOULD have a way to do discovery of endpoints and their identities
