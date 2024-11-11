@@ -41,7 +41,7 @@ author:
 normative:
 
 informative:
-  thomosn-hld:
+  thomson-hld:
     title: "HTTPS for Local Domains"
     author:
       org:
@@ -65,7 +65,7 @@ informative:
      date: 2022
      target: https://github.com/hallambaker/Mathematical-Mesh
 
-  iotops-suib:
+  iotops-suib-prezo:
      title: "SUIB: Browsing local web resources in a secure usable manner"
      author:
        -
@@ -79,6 +79,17 @@ informative:
      date: November 2021
      ann: "Presentation of IOT Security Foundation SUIB to IETF112 IOTOPS working group"
      target: https://datatracker.ietf.org/meeting/112/materials/slides-112-iotops-suib-browsing-local-web-resources-in-a-secure-usable-manner-iot-device-configuration-as-a-special-case-00.pdf
+
+
+
+  iotops-suib:
+     title: "SUIB: Router and IoT Vulnerabilities: Insecure by Design"
+     author:
+       org: IOT Security Foundation
+     date: August 2021
+     target: https://iotsecurityfoundation.org/wp-content/uploads/2021/08/ManySecured-SUIB-White-Paper.pdf
+
+
 
 
 --- abstract
@@ -239,7 +250,7 @@ secure association rooted in the connection that sent it:
 
 # Related
 
-{{thomosn-hld}}
+{{thomson-hld}}
 
 {{tpac}}
 
@@ -247,7 +258,7 @@ secure association rooted in the connection that sent it:
 
 {{phb-mesh}}
 
-{{iotops-suib}}
+{{iotops-suib}} and {{iotops-suib-prezo}}
 
 # Security Considerations
 
