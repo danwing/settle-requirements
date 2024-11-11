@@ -238,7 +238,7 @@ Table of Contents
 
 6.  Related
 
-   [thomosn-hld]
+   [thomson-hld]
 
    [tpac]
 
@@ -246,7 +246,7 @@ Table of Contents
 
    [phb-mesh]
 
-   [iotops-suib]
+   [iotops-suib] and [iotops-suib-prezo]
 
 7.  Security Considerations
 
@@ -272,6 +272,12 @@ Table of Contents
 9.2.  Informative References
 
    [iotops-suib]
+              IOT Security Foundation, "SUIB: Router and IoT
+              Vulnerabilities: Insecure by Design", August 2021,
+              <https://iotsecurityfoundation.org/wp-
+              content/uploads/2021/08/ManySecured-SUIB-White-Paper.pdf>.
+
+   [iotops-suib-prezo]
               Geertsma, J., Amsüss, C., Richardson, M., and N. Allott,
               "SUIB: Browsing local web resources in a secure usable
               manner", November 2021,
@@ -299,7 +305,7 @@ Table of Contents
               Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
               <https://www.rfc-editor.org/rfc/rfc8799>.
 
-   [thomosn-hld]
+   [thomson-hld]
               Thomson, M., "HTTPS for Local Domains", September 2017,
               <https://docs.google.com/document/u/0/
               d/170rFC91jqvpFrKIqG4K8Vox8AL4LeQXzfikBQXYPmzU/edit>.
