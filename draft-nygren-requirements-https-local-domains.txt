@@ -5,8 +5,8 @@
 Network Working Group                                          E. Nygren
 Internet-Draft                                       Akamai Technologies
 Intended status: Informational                                   D. Wing
-Expires: 15 May 2025                                Cloud Software Group
-                                                        11 November 2024
+Expires: 16 May 2025                                Cloud Software Group
+                                                        12 November 2024
 
 
                 Requirements for HTTPS for Local Domains
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 May 2025.
+   This Internet-Draft will expire on 16 May 2025.
 
 Copyright Notice
 
@@ -242,15 +242,21 @@ Table of Contents
 
 6.  Related
 
-   [thomson-hld]
+   Martin Thomson wrote a document on HTTPS for Local Domains which
+   covers requirements, discusses several solutions and their tradeoffs,
+   and suggests a solution with hostnames encoding the server's public
+   key [thomson-hld] in November 2017.
 
-   [tpac]
+   W3C had a workshop on the problem in September 2024 [tpac].
 
    Section 6 of [RFC8799]
 
    [phb-mesh]
 
-   [iotops-suib] and [iotops-suib-prezo]
+   The IOTOPS working group and the associated IOT Security Forum
+   discussed the problem and some requirements in their white paper
+   [iotops-suib] and presentation to IOTOPS working group at IETF112
+   [iotops-suib-prezo].
 
 7.  Security Considerations
 
