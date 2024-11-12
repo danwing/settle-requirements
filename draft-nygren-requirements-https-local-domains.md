@@ -80,8 +80,6 @@ informative:
      ann: "Presentation of IOT Security Foundation SUIB to IETF112 IOTOPS working group"
      target: https://datatracker.ietf.org/meeting/112/materials/slides-112-iotops-suib-browsing-local-web-resources-in-a-secure-usable-manner-iot-device-configuration-as-a-special-case-00.pdf
 
-
-
   iotops-suib:
      title: "SUIB: Router and IoT Vulnerabilities: Insecure by Design"
      author:
@@ -89,6 +87,10 @@ informative:
      date: August 2021
      target: https://iotsecurityfoundation.org/wp-content/uploads/2021/08/ManySecured-SUIB-White-Paper.pdf
 
+  iotsf:
+     title: "IOT Security Foundation"
+     date: September 2015
+     target: https://iotsecurityfoundation.org
 
 
 
@@ -260,13 +262,23 @@ encoding the server's public key {{thomson-hld}} in November 2017.
 
 W3C had a workshop on the problem in September 2024 {{tpac}}.
 
-{{Section 6 of ?RFC8799}}
+The boundaries of a limited domain -- such as the local domain described in this
+document -- are explored in {{Section 6 of ?RFC8799}}.
 
-{{phb-mesh}}
+The IOTOPS working group and the associated IOT Security Foundation
+{{iotsf}} discussed the problem and some requirements in their white
+paper {{iotops-suib}} and presentation to IOTOPS working group at
+IETF112 {{iotops-suib-prezo}}.
 
-The IOTOPS working group and the associated IOT Security Forum discussed the problem and
-some requirements in their white paper {{iotops-suib}} and presentation to IOTOPS working
-group at IETF112 {{iotops-suib-prezo}}.
+A threshold key system is described and implemented at {{phb-mesh}} with the following
+description:
+
+> The Mesh is designed to provide users with the highest level of
+  security that is possible without asking them to do anything at
+  all. For this to become possible, the Mesh will have to be shipped
+  to users as part of the machine Operating System.
+
+
 
 # Security Considerations
 
