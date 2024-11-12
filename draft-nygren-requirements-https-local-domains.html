@@ -1472,11 +1472,22 @@ secure association rooted in the connection that sent it:<a href="#section-5-1" 
 discusses several solutions and their tradeoffs, and suggests a solution with hostnames
 encoding the server's public key <span>[<a href="#thomson-hld" class="cite xref">thomson-hld</a>]</span> in November 2017.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">W3C had a workshop on the problem in September 2024 <span>[<a href="#tpac" class="cite xref">tpac</a>]</span>.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3"><span><a href="https://rfc-editor.org/rfc/rfc8799#section-6" class="relref">Section 6</a> of [<a href="#RFC8799" class="cite xref">RFC8799</a>]</span><a href="#section-6-3" class="pilcrow">¶</a></p>
-<p id="section-6-4"><span>[<a href="#phb-mesh" class="cite xref">phb-mesh</a>]</span><a href="#section-6-4" class="pilcrow">¶</a></p>
-<p id="section-6-5">The IOTOPS working group and the associated IOT Security Forum discussed the problem and
-some requirements in their white paper <span>[<a href="#iotops-suib" class="cite xref">iotops-suib</a>]</span> and presentation to IOTOPS working
-group at IETF112 <span>[<a href="#iotops-suib-prezo" class="cite xref">iotops-suib-prezo</a>]</span>.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-3">The boundaries of a limited domain -- such as the local domain described in this
+document -- are explored in <span><a href="https://rfc-editor.org/rfc/rfc8799#section-6" class="relref">Section 6</a> of [<a href="#RFC8799" class="cite xref">RFC8799</a>]</span>.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">The IOTOPS working group and the associated IOT Security Foundation
+<span>[<a href="#iotsf" class="cite xref">iotsf</a>]</span> discussed the problem and some requirements in their white
+paper <span>[<a href="#iotops-suib" class="cite xref">iotops-suib</a>]</span> and presentation to IOTOPS working group at
+IETF112 <span>[<a href="#iotops-suib-prezo" class="cite xref">iotops-suib-prezo</a>]</span>.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-5">A threshold key system is described and implemented at <span>[<a href="#phb-mesh" class="cite xref">phb-mesh</a>]</span> with the following
+description:<a href="#section-6-5" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-6-6.1">
+          <p id="section-6-6.1.1">The Mesh is designed to provide users with the highest level of
+  security that is possible without asking them to do anything at
+  all. For this to become possible, the Mesh will have to be shipped
+  to users as part of the machine Operating System.<a href="#section-6-6.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="security-considerations">
@@ -1531,6 +1542,10 @@ group at IETF112 <span>[<a href="#iotops-suib-prezo" class="cite xref">iotops-su
         <dd>
 <span class="refAuthor">Geertsma, J.</span>, <span class="refAuthor">Amsüss, C.</span>, <span class="refAuthor">Richardson, M.</span>, and <span class="refAuthor">N. Allott</span>, <span class="refTitle">"SUIB: Browsing local web resources in a secure usable manner"</span>, <time datetime="2021-11" class="refDate">November 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/meeting/112/materials/slides-112-iotops-suib-browsing-local-web-resources-in-a-secure-usable-manner-iot-device-configuration-as-a-special-case-00.pdf">https://datatracker.ietf.org/meeting/112/materials/slides-112-iotops-suib-browsing-local-web-resources-in-a-secure-usable-manner-iot-device-configuration-as-a-special-case-00.pdf</a>&gt;</span>. <span class="annotation">Presentation of IOT Security Foundation SUIB to IETF112 IOTOPS working group</span>
         </dd>
+<dd class="break"></dd>
+<dt id="iotsf">[iotsf]</dt>
+        <dd>
+<span class="refTitle">"IOT Security Foundation"</span>, <time datetime="2015-09" class="refDate">September 2015</time>, <span>&lt;<a href="https://iotsecurityfoundation.org">https://iotsecurityfoundation.org</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="phb-mesh">[phb-mesh]</dt>
         <dd>
