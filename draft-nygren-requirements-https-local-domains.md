@@ -254,15 +254,19 @@ secure association rooted in the connection that sent it:
 
 # Related
 
-{{thomson-hld}}
+Martin Thomson wrote a document on HTTPS for Local Domains which covers requirements,
+discusses several solutions and their tradeoffs, and suggests a solution with hostnames
+encoding the server's public key {{thomson-hld}} in November 2017.
 
-{{tpac}}
+W3C had a workshop on the problem in September 2024 {{tpac}}.
 
 {{Section 6 of ?RFC8799}}
 
 {{phb-mesh}}
 
-{{iotops-suib}} and {{iotops-suib-prezo}}
+The IOTOPS working group and the associated IOT Security Forum discussed the problem and
+some requirements in their white paper {{iotops-suib}} and presentation to IOTOPS working
+group at IETF112 {{iotops-suib-prezo}}.
 
 # Security Considerations
 
