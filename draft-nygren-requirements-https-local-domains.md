@@ -182,6 +182,9 @@ out of business or lose interest in old equipment
 support, as vendors go out of business or lose interest in old
 equipment.
 
+1. Could this help with HTTPS access to Wi-Fi login portals
+({{?RFC8952}}, {{?RFC8910}})?
+
 ## Human Factors Requirements
 
 1. SHOULD have a way to do discovery of endpoints and their identities
