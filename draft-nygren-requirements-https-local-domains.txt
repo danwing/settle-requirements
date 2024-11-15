@@ -5,8 +5,8 @@
 Network Working Group                                          E. Nygren
 Internet-Draft                                       Akamai Technologies
 Intended status: Informational                                   D. Wing
-Expires: 16 May 2025                                Cloud Software Group
-                                                        12 November 2024
+Expires: 19 May 2025                                Cloud Software Group
+                                                        15 November 2024
 
 
                 Requirements for HTTPS for Local Domains
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 May 2025.
+   This Internet-Draft will expire on 19 May 2025.
 
 Copyright Notice
 
@@ -162,6 +162,9 @@ Table of Contents
    16.  Device reset-to-factory settings MUST NOT require initial vendor
         support, as vendors go out of business or lose interest in old
         equipment.
+
+   17.  Could this help with HTTPS access to Wi-Fi login portals
+        ([RFC8952], [RFC8910])?
 
 3.2.  Human Factors Requirements
 
@@ -324,6 +327,15 @@ Table of Contents
    [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
               Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
               <https://www.rfc-editor.org/rfc/rfc8799>.
+
+   [RFC8910]  Kumari, W. and E. Kline, "Captive-Portal Identification in
+              DHCP and Router Advertisements (RAs)", RFC 8910,
+              DOI 10.17487/RFC8910, September 2020,
+              <https://www.rfc-editor.org/rfc/rfc8910>.
+
+   [RFC8952]  Larose, K., Dolson, D., and H. Liu, "Captive Portal
+              Architecture", RFC 8952, DOI 10.17487/RFC8952, November
+              2020, <https://www.rfc-editor.org/rfc/rfc8952>.
 
    [thomson-hld]
               Thomson, M., "HTTPS for Local Domains", September 2017,
