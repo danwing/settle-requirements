@@ -99,7 +99,12 @@ informative:
        name: Emily M. Stark
      target: https://emilymstark.com/2021/12/24/when-a-web-pki-certificate-wont-cut-it.html
 
-
+  shared:
+     title: "APPROACH-2: Using Shared Secret"
+     date: September 2019
+     author:
+       org: W3C
+     target: https://httpslocal.github.io/proposals/#approach-2
 
 --- abstract
 
@@ -291,6 +296,9 @@ description:
 A summary of the problem and analysis of several solutions
 (Locally-installed CAs, Plex, WebRTC and WebTransport, TOFU, shared
 secrets) and some drawbacks of those solutions is at {{stark}}.
+
+A method using PAKE and a shared secret (displayed on the server) is
+explained at {{shared}}.
 
 # Security Considerations
 
