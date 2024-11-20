@@ -272,6 +272,9 @@ Table of Contents
    installed CAs, Plex, WebRTC and WebTransport, TOFU, shared secrets)
    and some drawbacks of those solutions is at [stark].
 
+   A method using PAKE and a shared secret (displayed on the server) is
+   explained at [shared].
+
 7.  Security Considerations
 
    TODO Security
@@ -340,6 +343,9 @@ Table of Contents
    [RFC8952]  Larose, K., Dolson, D., and H. Liu, "Captive Portal
               Architecture", RFC 8952, DOI 10.17487/RFC8952, November
               2020, <https://www.rfc-editor.org/rfc/rfc8952>.
+
+   [shared]   W3C, "APPROACH-2: Using Shared Secret", September 2019,
+              <https://httpslocal.github.io/proposals/#approach-2>.
 
    [stark]    Stark, E. M., "When a web PKI certificate won't cut it",
               December 2021, <https://emilymstark.com/2021/12/24/when-a-
