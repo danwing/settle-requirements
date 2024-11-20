@@ -288,8 +288,9 @@ description:
   all. For this to become possible, the Mesh will have to be shipped
   to users as part of the machine Operating System.
 
-A summary of the problem and analysis of solutions and some drawbacks of
-those solutions is at {{stark}}.
+A summary of the problem and analysis of several solutions
+(Locally-installed CAs, Plex, WebRTC and WebTransport, TOFU, shared
+secrets) and some drawbacks of those solutions is at {{stark}}.
 
 # Security Considerations
 
