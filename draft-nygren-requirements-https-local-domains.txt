@@ -5,8 +5,8 @@
 Network Working Group                                          E. Nygren
 Internet-Draft                                       Akamai Technologies
 Intended status: Informational                                   D. Wing
-Expires: 19 May 2025                                Cloud Software Group
-                                                        15 November 2024
+Expires: 24 May 2025                                Cloud Software Group
+                                                        20 November 2024
 
 
                 Requirements for HTTPS for Local Domains
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 May 2025.
+   This Internet-Draft will expire on 24 May 2025.
 
 Copyright Notice
 
@@ -268,6 +268,9 @@ Table of Contents
       all.  For this to become possible, the Mesh will have to be
       shipped to users as part of the machine Operating System.
 
+   A summary of the problem and analysis of solutions and some drawbacks
+   of those solutions is at [stark].
+
 7.  Security Considerations
 
    TODO Security
@@ -336,6 +339,10 @@ Table of Contents
    [RFC8952]  Larose, K., Dolson, D., and H. Liu, "Captive Portal
               Architecture", RFC 8952, DOI 10.17487/RFC8952, November
               2020, <https://www.rfc-editor.org/rfc/rfc8952>.
+
+   [stark]    Stark, E. M., "When a web PKI certificate won't cut it",
+              December 2021, <https://emilymstark.com/2021/12/24/when-a-
+              web-pki-certificate-wont-cut-it.html>.
 
    [thomson-hld]
               Thomson, M., "HTTPS for Local Domains", September 2017,
