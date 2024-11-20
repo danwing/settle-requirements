@@ -92,6 +92,13 @@ informative:
      date: September 2015
      target: https://iotsecurityfoundation.org
 
+  stark:
+     title: "When a web PKI certificate won't cut it"
+     date: December 2021
+     author:
+       name: Emily M. Stark
+     target: https://emilymstark.com/2021/12/24/when-a-web-pki-certificate-wont-cut-it.html
+
 
 
 --- abstract
@@ -281,7 +288,8 @@ description:
   all. For this to become possible, the Mesh will have to be shipped
   to users as part of the machine Operating System.
 
-
+A summary of the problem and analysis of solutions and some drawbacks of
+those solutions is at {{stark}}.
 
 # Security Considerations
 
