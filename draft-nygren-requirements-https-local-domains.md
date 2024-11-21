@@ -12,14 +12,19 @@ v: 3
 # area: AREA
 # workgroup: WG Working Group
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - https
+ - local domains
+ - pki
+ - pkix
+ - certificate authority
+ - tls
+ - identity
+ - authentication
 venue:
-#  group: WG
-#  type: Working Group
-#  mail: WG@example.com
-#  arch: https://example.com/WG
+  group: SETTLE
+  type: ""
+  mail: settle@ietf.org
+  arch: https://mailarchive.ietf.org/arch/browse/settle/
   github: "danwing/requirements-https-local-domains"
   latest: "https://danwing.github.io/requirements-https-local-domains/draft-nygren-requirements-https-local-domains.html"
 
@@ -44,7 +49,6 @@ informative:
   thomson-hld:
     title: "HTTPS for Local Domains"
     author:
-      org:
       name: Martin Thomson
     date: September 2017
     target: https://docs.google.com/document/u/0/d/170rFC91jqvpFrKIqG4K8Vox8AL4LeQXzfikBQXYPmzU/edit
@@ -106,10 +110,26 @@ informative:
        org: W3C
      target: https://httpslocal.github.io/proposals/#approach-2
 
+  plex:
+     title: How Plex Is Doing Https for All Its Users
+     date: June 2015
+     author:
+       name: Filippo Valsorda
+     target: https://words.filippo.io/how-plex-is-doing-https-for-all-its-users/
+
+  w3c-httpslocal:
+     title: "HTTPS in Local Network Community Group"
+     date: 2019
+     author:
+       org: W3C
+     target: https://github.com/httpslocal
+
+
+
 --- abstract
 
 This document explores requirements for authenticating local servers
-which does not rely on PKIX certificates.
+without relying on PKIX certificates.
 
 --- middle
 
@@ -117,11 +137,37 @@ which does not rely on PKIX certificates.
 
 Servers on a local network cannot easily get PKIX certificates
 {{?RFC5280}} signed by a public Certification Authority because of
-their firewall or NAT, lack of domain name delegation, and
+their firewall or NAT, lack of domain name delegation, and need for
 ongoing certificate renewal.
 
-This document explores requirements for an alternative server authentication
-system for such local hosts.
+This problem has been well recognized since about 2017 and several
+proposals have been suggested to solve this problem, each
+with their own drawbacks.  This paper is not intended to summarize
+the proposals or their drawbacks; for that detail see the
+pointers to previous work in {{related}}.
+
+At a high level, the proposals have involved solutions such as:
+
+  * pre-shared secrets (scanned, printed, or displayed by the server)
+
+  * Public DNS pointing at local domain's IP address (e.g., {{plex}})
+
+  * Local Certificate Authority, where a Certificate Authority is
+    added to client's certificate trust list and that CA signs
+    certificates for devices within the local network
+
+  * Trust On First Use (TOFU), where a user verifies the first
+    connection to a server and the client remembers that verification,
+    similar to common use of ssh.
+
+  * WebRTC and WebTransport, where a PKI-signed server provides a
+    public key fingerprint of another server that it has previously
+    bootstrapped.
+
+  * Encoding server's public key into the hostname {{thomson-hld}}
+
+This document explores IETF requirements for an alternative server
+authentication system for local hosts.
 
 # Conventions and Definitions
 
@@ -134,7 +180,7 @@ system for such local hosts.
 1. The Web Origin MUST be cryptographically bound to one or more key
 pairs, where the private keying material is on the service endpoint
 and where an attacker without the private key(s) is unable to access
-any state associated with the We
+any state associated with the Web Origin.
 
 1. SHOULD abstract names from IP addresses.  Any given name should be
 able to have a mixture of IPv4, IPv6 LinkLocal (on an Interface), IPv6
@@ -269,12 +315,13 @@ secure association rooted in the connection that sent it:
 * Secure communications to localhost processes from a browser (e.g., admin tools)
 
 
-# Related
+# Related {#related}
 
 Martin Thomson wrote a document on HTTPS for Local Domains which covers requirements,
 discusses several solutions and their tradeoffs, and suggests a solution with hostnames
 encoding the server's public key {{thomson-hld}} in November 2017.
 
+W3C worked on this problem from 2017 through 2021 {{w3c-httpslocal}}. More recently,
 W3C had a workshop on the problem in September 2024 {{tpac}}.
 
 The boundaries of a limited domain -- such as the local domain described in this
