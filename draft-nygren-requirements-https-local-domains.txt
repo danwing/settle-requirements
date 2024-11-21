@@ -5,8 +5,8 @@
 Network Working Group                                          E. Nygren
 Internet-Draft                                       Akamai Technologies
 Intended status: Informational                                   D. Wing
-Expires: 24 May 2025                                Cloud Software Group
-                                                        20 November 2024
+Expires: 25 May 2025                                Cloud Software Group
+                                                        21 November 2024
 
 
                 Requirements for HTTPS for Local Domains
@@ -15,7 +15,7 @@ Expires: 24 May 2025                                Cloud Software Group
 Abstract
 
    This document explores requirements for authenticating local servers
-   which does not rely on PKIX certificates.
+   without relying on PKIX certificates.
 
 About This Document
 
@@ -26,6 +26,11 @@ About This Document
    nygren-requirements-https-local-domains.html.  Status information for
    this document may be found at https://datatracker.ietf.org/doc/draft-
    nygren-requirements-https-local-domains/.
+
+   Discussion of this document takes place on the SETTLE mailing list
+   (mailto:settle@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/settle/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/settle/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/danwing/requirements-https-local-domains.
@@ -45,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 May 2025.
+   This Internet-Draft will expire on 25 May 2025.
 
 Copyright Notice
 
@@ -83,11 +88,37 @@ Table of Contents
 
    Servers on a local network cannot easily get PKIX certificates
    [RFC5280] signed by a public Certification Authority because of their
-   firewall or NAT, lack of domain name delegation, and ongoing
+   firewall or NAT, lack of domain name delegation, and need for ongoing
    certificate renewal.
 
-   This document explores requirements for an alternative server
-   authentication system for such local hosts.
+   This problem has been well recognized since about 2017 and several
+   proposals have been suggested to solve this problem, each with their
+   own drawbacks.  This paper is not intended to summarize the proposals
+   or their drawbacks; for that detail see the pointers to previous work
+   in Section 6.
+
+   At a high level, the proposals have involved solutions such as:
+
+   *  pre-shared secrets (scanned, printed, or displayed by the server)
+
+   *  Public DNS pointing at local domain's IP address (e.g., [plex])
+
+   *  Local Certificate Authority, where a Certificate Authority is
+      added to client's certificate trust list and that CA signs
+      certificates for devices within the local network
+
+   *  Trust On First Use (TOFU), where a user verifies the first
+      connection to a server and the client remembers that verification,
+      similar to common use of ssh.
+
+   *  WebRTC and WebTransport, where a PKI-signed server provides a
+      public key fingerprint of another server that it has previously
+      bootstrapped.
+
+   *  Encoding server's public key into the hostname [thomson-hld]
+
+   This document explores IETF requirements for an alternative server
+   authentication system for local hosts.
 
 2.  Conventions and Definitions
 
@@ -104,7 +135,7 @@ Table of Contents
    1.   The Web Origin MUST be cryptographically bound to one or more
         key pairs, where the private keying material is on the service
         endpoint and where an attacker without the private key(s) is
-        unable to access any state associated with the We
+        unable to access any state associated with the Web Origin.
 
    2.   SHOULD abstract names from IP addresses.  Any given name should
         be able to have a mixture of IPv4, IPv6 LinkLocal (on an
@@ -250,7 +281,9 @@ Table of Contents
    and suggests a solution with hostnames encoding the server's public
    key [thomson-hld] in November 2017.
 
-   W3C had a workshop on the problem in September 2024 [tpac].
+   W3C worked on this problem from 2017 through 2021 [w3c-httpslocal].
+   More recently, W3C had a workshop on the problem in September 2024
+   [tpac].
 
    The boundaries of a limited domain -- such as the local domain
    described in this document -- are explored in Section 6 of [RFC8799].
@@ -320,6 +353,10 @@ Table of Contents
    [phb-mesh] Hallam-Baker, P., "Mathematical Mesh", 2022,
               <https://github.com/hallambaker/Mathematical-Mesh>.
 
+   [plex]     Valsorda, F., "How Plex Is Doing Https for All Its Users",
+              June 2015, <https://words.filippo.io/how-plex-is-doing-
+              https-for-all-its-users/>.
+
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -358,6 +395,10 @@ Table of Contents
 
    [tpac]     IL, C., "HTTPS for Local Networks", September 2024,
               <https://github.com/w3c/tpac2024-breakouts/issues/78>.
+
+   [w3c-httpslocal]
+              W3C, "HTTPS in Local Network Community Group", 2019,
+              <https://github.com/httpslocal>.
 
 Acknowledgments
 
