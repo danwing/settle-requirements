@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-28T00:40:29.314411+00:00",
+  "timestamp": "2024-12-01T00:49:45.598298+00:00",
   "repo": "danwing/requirements-https-local-domains",
   "labels": [
     {
@@ -49,6 +49,23 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDONNWq_86g8806",
+      "title": "Zooko's Triangle",
+      "url": "https://github.com/danwing/requirements-https-local-domains/issues/1",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The list of requirements isn't particularly helpful to me without first addressing the high level stuff.\r\n\r\nhttps://web.archive.org/web/20011020191610/http://zooko.com/distnames.html is probably worth spending some time on.  Talking about why \"my printer\" is not a useful reference identifier, but how it is also the only useful identifier we have.  That sort of thing.",
+      "createdAt": "2024-11-28T00:49:15Z",
+      "updatedAt": "2024-11-28T00:49:15Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
