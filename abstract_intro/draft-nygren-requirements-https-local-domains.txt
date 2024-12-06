@@ -1,0 +1,439 @@
+
+
+
+
+Network Working Group                                          E. Nygren
+Internet-Draft                                       Akamai Technologies
+Intended status: Informational                                   D. Wing
+Expires: 9 June 2025                                Cloud Software Group
+                                                         6 December 2024
+
+
+                Requirements for HTTPS for Local Domains
+          draft-nygren-requirements-https-local-domains-latest
+
+Abstract
+
+   When connecting to servers on their local network, users are
+   surprised to encounter user interfaces that display errors, show
+   insecure connections, and block some HTTP features when missing a
+   secure context.  However, obtaining PKIX certificates for those
+   servers is difficult for a variety of reasons.
+
+   This document explores requirements for authenticating local servers
+   without relying on PKIX certificates.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://danwing.github.io/requirements-https-local-domains/draft-
+   nygren-requirements-https-local-domains.html.  Status information for
+   this document may be found at https://datatracker.ietf.org/doc/draft-
+   nygren-requirements-https-local-domains/.
+
+   Discussion of this document takes place on the SETTLE mailing list
+   (mailto:settle@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/settle/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/settle/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/danwing/requirements-https-local-domains.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 9 June 2025.
+
+Copyright Notice
+
+   Copyright (c) 2024 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Requirements
+     3.1.  Technical Requirements
+     3.2.  Human Factors Requirements
+   4.  Big Open Questions
+   5.  Use Cases
+   6.  Related
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   Servers on local networks have historically used and encouraged
+   unencrypted communications -- printers, routers, network attacked
+   storage (NAS).  However, browsers disadvantage unencrypted
+   communications (e.g., [not-secure], [sec-context]) which increases
+   importance of a secure context (HTTPS) to local domains.  Today, a
+   secure context is obtained with a PKIX certificate ([RFC5280]) signed
+   by a Certification Authority that is trusted by the client.
+
+   However, servers on a local network cannot easily get PKIX
+   certificates signed by a Certification Authority because of their
+   firewall or NAT (to prove domain ownership), lack of domain name
+   delegation, and need for ongoing certificate renewal.
+
+   The problem has been well recognized since about 2017 and several
+   proposals have been suggested to solve this problem, each with their
+   own drawbacks.  This paper is not intended to summarize the proposals
+   or their drawbacks; for that detail see the pointers to previous work
+   in Section 6.  At a high level, the proposals have involved solutions
+   such as:
+
+   *  pre-shared secrets (scanned, printed, or displayed by the server)
+
+   *  Public DNS pointing at local domain's IP address (e.g., [plex])
+
+   *  Local Certificate Authority, where a Certificate Authority is
+      added to client's certificate trust list and that CA signs
+      certificates for devices within the local network
+
+   *  Trust On First Use (TOFU), where a user verifies the first
+      connection to a server and the client remembers that verification,
+      similar to common use of ssh
+
+   *  WebRTC and WebTransport, where a PKI-signed server provides a
+      public key fingerprint of another server that it has previously
+      bootstrapped
+
+   *  Encoding server's public key into the hostname [thomson-hld]
+
+   This document explores IETF requirements for an alternative server
+   authentication system for local hosts.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Requirements
+
+3.1.  Technical Requirements
+
+   1.   The Web Origin MUST be cryptographically bound to one or more
+        key pairs, where the private keying material is on the service
+        endpoint and where an attacker without the private key(s) is
+        unable to access any state associated with the Web Origin.
+
+   2.   SHOULD abstract names from IP addresses.  Any given name should
+        be able to have a mixture of IPv4, IPv6 LinkLocal (on an
+        Interface), IPv6 ULA, and IPv6 Globally-Routable addresses.
+        (For example, must be able to interact well with DNSSD)
+
+   3.   Clients MUST be able to cryptographically validate that the
+        authenticating server certificate of a service endpoint matches
+        the identity in the URI / Web Origin URIs MUST be possible to
+        construct that encapsulate a Web Origin and cryptographically
+        bound identity information
+
+   4.   URIs MUST be possible to construct that encapsulate a Web Origin
+        and cryptographically bound identity information
+
+   5.   It SHOULD be possible to have a way to represent a URI that
+        includes a single specific IP address and the cryptographic
+        identity of the service endpoint.
+
+   6.   SHOULD/MUST NOT have a reliance on central trust hierarchy or
+        continued reliance on a service operated by a vendor.
+
+   7.   SHOULD support key rotation (even if via 301 redirect) — Q: is
+        it acceptable to state to be lost here?  Note: likely can’t do
+        301 if doing TLS (HTTPS).  Is this suggestion to start HTTP and
+        upgrade to HTTPS?  Could be useful for HTTPS but redirect
+        unavailable for IPP, SMB, DoH.
+
+   8.   MUST support HTTPS, IPPS, DoH, DoT, SMB over QUIC
+
+   9.   SHOULD support crypto agility (with more than one active key
+        type)
+
+   10.  SHOULD support TLS SNI so a server knows which key pair/cert is
+        expected
+
+   11.  SHOULD support localhost uses as well (e.g., for sending a user
+        to connect to a local service)
+
+   12.  SHOULD support building trust relationships within devices in
+        the local environment
+
+   13.  SHOULD integrate well with an evolution of
+        https://wicg.github.io/private-network-access/ and both allow
+        for an improved model there but should also provide more robust
+        solutions to vulnerabilities that it tries to address
+
+   14.  SHOULD constrain to .local and .internal.  MAY constrain to the
+        DHCP domain-search value??  Should we also allow any arbitrary
+        name if the IP address is local (RFC1918 address), too?
+
+   15.  MUST NOT require ongoing vendor support or function, as vendors
+        go out of business or lose interest in old equipment
+
+   16.  Device reset-to-factory settings MUST NOT require initial vendor
+        support, as vendors go out of business or lose interest in old
+        equipment.
+
+   17.  Could this help with HTTPS access to Wi-Fi login portals
+        ([RFC8952], [RFC8910])?
+
+3.2.  Human Factors Requirements
+
+   1.  SHOULD have a way to do discovery of endpoints and their
+       identities (for example, via DNSSD?)
+
+   2.  SHOULD have human factors and adversarial testing on proposed
+       solutions to make sure that this solution provides a reasonable
+       experience to average and novice end-users and does not introduce
+       new security exploitation vectors
+
+   3.  SHOULD have a URI that users can Bookmark to create an
+       association to a friendly name.  Further detail: Can URL bar of
+       the browser honor mDNS/DNSSD advertised names, or give a pull-
+       down of them similar to how the “add printer” dialog does for
+       printers?  This would help ease the use of long FQDN so it’s
+       almost as easy as router.local.  Especially if it could show a
+       nickname that is configured by the printer.
+
+   4.  (SHOULD?) have a way to represent these URIs to humans in a
+       consistent, readhable, and non-confusing fashion.  (In a browser,
+       users shouldn’t see the key fingerprint by default but rather a
+       representation of its presence)
+
+4.  Big Open Questions
+
+   1.  Is it acceptable for the Web Origin to change as part of key
+       rotations?  A: no, this doesn’t happen today and changing the web
+       origin would violate the principle of least surprise.
+
+   2.  Is TOFU acceptable?
+
+       *  TOFU is arguably what we have today with self-signed
+          certificates which can be trusted, and are O(client_server)
+          where each client has to trust each server’s self-signed
+          certificate manually.  If we can reduce the TOFU so that *each
+          client_ does not need to TOFU _each server_, we can improve
+          things, ideally to O(client), where each client needs to TOFU
+          once to the network, and also have a way for more paranoid
+          clients to validate a fingerprint.
+
+   3.  What is the User Experience for any trust relationship / web-of-
+       trust?
+
+   4.  What is the nature of the trust relationship?
+
+       *  Peer trust web?
+
+       *  Central CA within the local environment / trust clearing
+          house?
+
+       *  Client establishes its own trust to the server
+
+   5.  How does this tie into systems like Matter/Thread that have their
+       own trust establishment frameworks?
+
+5.  Use Cases
+
+   For the below, “Secure communications” means being able to make a TLS
+   connection to a service such that the service is able to authenticate
+   itself in a way to prevent MitM attacks.  The security model must be
+   TOFU at a minimum, but when the identity of a service is none it
+   should be possible to send it as a URI in such as a way to present a
+   secure association rooted in the connection that sent it:
+
+   *  Secure communications via HTTPS to admin interfaces on CPEs
+
+   *  Secure communications to DoH/DoT servers on CPEs
+
+   *  Secure communications to printers (HTTPS admin interfaces and IPPS
+      [RFC7472] printing)
+
+   *  Secure communications to other local services (SMB over QUIC) and
+      IoT devices
+
+   *  Secure communications to localhost processes from a browser (e.g.,
+      admin tools)
+
+6.  Related
+
+   Martin Thomson wrote a document on HTTPS for Local Domains which
+   covers requirements, discusses several solutions and their tradeoffs,
+   and suggests a solution with hostnames encoding the server's public
+   key [thomson-hld] in November 2017.
+
+   W3C worked on this problem from 2017 through 2021 [w3c-httpslocal].
+   More recently, W3C had a workshop on the problem in September 2024
+   [tpac].
+
+   The boundaries of a limited domain -- such as the local domain
+   described in this document -- are explored in Section 6 of [RFC8799].
+
+   The IOTOPS working group and the associated IOT Security Foundation
+   [iotsf] discussed the problem and some requirements in their white
+   paper [iotops-suib] and presentation to IOTOPS working group at
+   IETF112 [iotops-suib-prezo].
+
+   A threshold key system is described and implemented at [phb-mesh]
+   with the following description:
+
+      The Mesh is designed to provide users with the highest level of
+      security that is possible without asking them to do anything at
+      all.  For this to become possible, the Mesh will have to be
+      shipped to users as part of the machine Operating System.
+
+   A summary of the problem and analysis of several solutions (Locally-
+   installed CAs, Plex, WebRTC and WebTransport, TOFU, shared secrets)
+   and some drawbacks of those solutions is at [stark].
+
+   A method using PAKE and a shared secret (displayed on the server) is
+   explained at [shared].
+
+7.  Security Considerations
+
+   TODO Security
+
+8.  IANA Considerations
+
+   This document has no IANA actions.
+
+9.  References
+
+9.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+9.2.  Informative References
+
+   [iotops-suib]
+              IOT Security Foundation, "SUIB: Router and IoT
+              Vulnerabilities: Insecure by Design", August 2021,
+              <https://iotsecurityfoundation.org/wp-
+              content/uploads/2021/08/ManySecured-SUIB-White-Paper.pdf>.
+
+   [iotops-suib-prezo]
+              Geertsma, J., Amsüss, C., Richardson, M., and N. Allott,
+              "SUIB: Browsing local web resources in a secure usable
+              manner", November 2021,
+              <https://datatracker.ietf.org/meeting/112/materials/
+              slides-112-iotops-suib-browsing-local-web-resources-in-a-
+              secure-usable-manner-iot-device-configuration-as-a-
+              special-case-00.pdf>.  Presentation of IOT Security
+              Foundation SUIB to IETF112 IOTOPS working group
+
+   [iotsf]    "IOT Security Foundation", September 2015,
+              <https://iotsecurityfoundation.org>.
+
+   [not-secure]
+              Google, "A secure web is here to stay", 2018,
+              <https://blog.chromium.org/2018/02/a-secure-web-is-here-
+              to-stay.html>.
+
+   [phb-mesh] Hallam-Baker, P., "Mathematical Mesh", 2022,
+              <https://github.com/hallambaker/Mathematical-Mesh>.
+
+   [plex]     Valsorda, F., "How Plex Is Doing Https for All Its Users",
+              June 2015, <https://words.filippo.io/how-plex-is-doing-
+              https-for-all-its-users/>.
+
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
+
+   [RFC7472]  McDonald, I. and M. Sweet, "Internet Printing Protocol
+              (IPP) over HTTPS Transport Binding and the 'ipps' URI
+              Scheme", RFC 7472, DOI 10.17487/RFC7472, March 2015,
+              <https://www.rfc-editor.org/rfc/rfc7472>.
+
+   [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
+              Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
+              <https://www.rfc-editor.org/rfc/rfc8799>.
+
+   [RFC8910]  Kumari, W. and E. Kline, "Captive-Portal Identification in
+              DHCP and Router Advertisements (RAs)", RFC 8910,
+              DOI 10.17487/RFC8910, September 2020,
+              <https://www.rfc-editor.org/rfc/rfc8910>.
+
+   [RFC8952]  Larose, K., Dolson, D., and H. Liu, "Captive Portal
+              Architecture", RFC 8952, DOI 10.17487/RFC8952, November
+              2020, <https://www.rfc-editor.org/rfc/rfc8952>.
+
+   [sec-context]
+              W3C, "Secure Contexts", 2023,
+              <https://w3c.github.io/webappsec-secure-contexts/>.
+
+   [shared]   W3C, "APPROACH-2: Using Shared Secret", September 2019,
+              <https://httpslocal.github.io/proposals/#approach-2>.
+
+   [stark]    Stark, E. M., "When a web PKI certificate won't cut it",
+              December 2021, <https://emilymstark.com/2021/12/24/when-a-
+              web-pki-certificate-wont-cut-it.html>.
+
+   [thomson-hld]
+              Thomson, M., "HTTPS for Local Domains", September 2017,
+              <https://docs.google.com/document/u/0/
+              d/170rFC91jqvpFrKIqG4K8Vox8AL4LeQXzfikBQXYPmzU/edit>.
+
+   [tpac]     IL, C., "HTTPS for Local Networks", September 2024,
+              <https://github.com/w3c/tpac2024-breakouts/issues/78>.
+
+   [w3c-httpslocal]
+              W3C, "HTTPS in Local Network Community Group", 2019,
+              <https://github.com/httpslocal>.
+
+Acknowledgments
+
+   TODO acknowledge.
+
+Authors' Addresses
+
+   Erik Nygren
+   Akamai Technologies
+   Email: erik+ietf@nygren.org
+   URI:   http://erik.nygren.org/
+
+
+   Dan Wing
+   Cloud Software Group Holdings, Inc.
+   Email: danwing@gmail.com
