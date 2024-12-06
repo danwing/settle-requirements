@@ -8,10 +8,16 @@
 <meta content="Erik Nygren" name="author">
 <meta content="Dan Wing" name="author">
 <meta content="
+       When connecting to servers on their local network, users are
+surprised to encounter user interfaces that display errors,
+show insecure connections, and block some HTTP features
+when missing a secure context.  However, obtaining PKIX
+certificates for those servers is difficult for a variety
+of reasons. 
        This document explores requirements for authenticating local servers
 without relying on PKIX certificates. 
     " name="description">
-<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="xml2rfc 3.25.0" name="generator">
 <meta content="https" name="keyword">
 <meta content="local domains" name="keyword">
 <meta content="pki" name="keyword">
@@ -22,7 +28,7 @@ without relying on PKIX certificates.
 <meta content="authentication" name="keyword">
 <meta content="draft-nygren-requirements-https-local-domains-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.24.0
+  xml2rfc 3.25.0
     Python 3.12.7
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1049,11 +1055,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">HTTPS for Local: Requirements</td>
-<td class="right">November 2024</td>
+<td class="right">December 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Nygren &amp; Wing</td>
-<td class="center">Expires 25 May 2025</td>
+<td class="center">Expires 9 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-nygren-requirements-https-local-domains-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-21" class="published">21 November 2024</time>
+<time datetime="2024-12-06" class="published">6 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-25">25 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-09">9 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1088,8 +1094,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Requirements for HTTPS for Local Domains</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document explores requirements for authenticating local servers
-without relying on PKIX certificates.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">When connecting to servers on their local network, users are
+surprised to encounter user interfaces that display errors,
+show insecure connections, and block some HTTP features
+when missing a secure context.  However, obtaining PKIX
+certificates for those servers is difficult for a variety
+of reasons.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document explores requirements for authenticating local servers
+without relying on PKIX certificates.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1126,7 +1138,7 @@ without relying on PKIX certificates.<a href="#section-abstract-1" class="pilcro
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1213,16 +1225,23 @@ without relying on PKIX certificates.<a href="#section-abstract-1" class="pilcro
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Servers on a local network cannot easily get PKIX certificates
-<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> signed by a public Certification Authority because of
-their firewall or NAT, lack of domain name delegation, and need for
-ongoing certificate renewal.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This problem has been well recognized since about 2017 and several
-proposals have been suggested to solve this problem, each
-with their own drawbacks.  This paper is not intended to summarize
-the proposals or their drawbacks; for that detail see the
-pointers to previous work in <a href="#related" class="auto internal xref">Section 6</a>.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">At a high level, the proposals have involved solutions such as:<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-1">Servers on local networks have historically used and encouraged
+unencrypted communications -- printers, routers, network attacked
+storage (NAS).  However, browsers disadvantage unencrypted
+communications (e.g., <span>[<a href="#not-secure" class="cite xref">not-secure</a>]</span>, <span>[<a href="#sec-context" class="cite xref">sec-context</a>]</span>) which increases
+importance of a secure context (HTTPS) to local domains.  Today, a
+secure context is obtained with a PKIX certificate (<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)
+signed by a Certification Authority that is trusted by the client.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">However, servers on a local network cannot easily get PKIX
+certificates signed by a Certification Authority because of their
+firewall or NAT (to prove domain ownership), lack of domain name
+delegation, and need for ongoing certificate renewal.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">The problem has been well recognized since about 2017 and several
+proposals have been suggested to solve this problem, each with their
+own drawbacks.  This paper is not intended to summarize the proposals
+or their drawbacks; for that detail see the pointers to previous work
+in <a href="#related" class="auto internal xref">Section 6</a>.  At a high level, the proposals have involved
+solutions such as:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-4.1">
           <p id="section-1-4.1.1">pre-shared secrets (scanned, printed, or displayed by the server)<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
@@ -1238,12 +1257,12 @@ certificates for devices within the local network<a href="#section-1-4.3.1" clas
         <li class="normal" id="section-1-4.4">
           <p id="section-1-4.4.1">Trust On First Use (TOFU), where a user verifies the first
 connection to a server and the client remembers that verification,
-similar to common use of ssh.<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
+similar to common use of ssh<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.5">
           <p id="section-1-4.5.1">WebRTC and WebTransport, where a PKI-signed server provides a
 public key fingerprint of another server that it has previously
-bootstrapped.<a href="#section-1-4.5.1" class="pilcrow">¶</a></p>
+bootstrapped<a href="#section-1-4.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.6">
           <p id="section-1-4.6.1">Encoding server's public key into the hostname <span>[<a href="#thomson-hld" class="cite xref">thomson-hld</a>]</span><a href="#section-1-4.6.1" class="pilcrow">¶</a></p>
@@ -1562,6 +1581,10 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
         <dd>
 <span class="refTitle">"IOT Security Foundation"</span>, <time datetime="2015-09" class="refDate">September 2015</time>, <span>&lt;<a href="https://iotsecurityfoundation.org">https://iotsecurityfoundation.org</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="not-secure">[not-secure]</dt>
+        <dd>
+<span class="refAuthor">Google</span>, <span class="refTitle">"A secure web is here to stay"</span>, <time datetime="2018" class="refDate">2018</time>, <span>&lt;<a href="https://blog.chromium.org/2018/02/a-secure-web-is-here-to-stay.html">https://blog.chromium.org/2018/02/a-secure-web-is-here-to-stay.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="phb-mesh">[phb-mesh]</dt>
         <dd>
 <span class="refAuthor">Hallam-Baker, P.</span>, <span class="refTitle">"Mathematical Mesh"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://github.com/hallambaker/Mathematical-Mesh">https://github.com/hallambaker/Mathematical-Mesh</a>&gt;</span>. </dd>
@@ -1589,6 +1612,10 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
 <dt id="RFC8952">[RFC8952]</dt>
         <dd>
 <span class="refAuthor">Larose, K.</span>, <span class="refAuthor">Dolson, D.</span>, and <span class="refAuthor">H. Liu</span>, <span class="refTitle">"Captive Portal Architecture"</span>, <span class="seriesInfo">RFC 8952</span>, <span class="seriesInfo">DOI 10.17487/RFC8952</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8952">https://www.rfc-editor.org/rfc/rfc8952</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="sec-context">[sec-context]</dt>
+        <dd>
+<span class="refAuthor">W3C</span>, <span class="refTitle">"Secure Contexts"</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://w3c.github.io/webappsec-secure-contexts/">https://w3c.github.io/webappsec-secure-contexts/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="shared">[shared]</dt>
         <dd>

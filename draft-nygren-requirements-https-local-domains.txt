@@ -5,14 +5,20 @@
 Network Working Group                                          E. Nygren
 Internet-Draft                                       Akamai Technologies
 Intended status: Informational                                   D. Wing
-Expires: 25 May 2025                                Cloud Software Group
-                                                        21 November 2024
+Expires: 9 June 2025                                Cloud Software Group
+                                                         6 December 2024
 
 
                 Requirements for HTTPS for Local Domains
           draft-nygren-requirements-https-local-domains-latest
 
 Abstract
+
+   When connecting to servers on their local network, users are
+   surprised to encounter user interfaces that display errors, show
+   insecure connections, and block some HTTP features when missing a
+   secure context.  However, obtaining PKIX certificates for those
+   servers is difficult for a variety of reasons.
 
    This document explores requirements for authenticating local servers
    without relying on PKIX certificates.
@@ -50,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 May 2025.
+   This Internet-Draft will expire on 9 June 2025.
 
 Copyright Notice
 
@@ -86,18 +92,25 @@ Table of Contents
 
 1.  Introduction
 
-   Servers on a local network cannot easily get PKIX certificates
-   [RFC5280] signed by a public Certification Authority because of their
-   firewall or NAT, lack of domain name delegation, and need for ongoing
-   certificate renewal.
+   Servers on local networks have historically used and encouraged
+   unencrypted communications -- printers, routers, network attacked
+   storage (NAS).  However, browsers disadvantage unencrypted
+   communications (e.g., [not-secure], [sec-context]) which increases
+   importance of a secure context (HTTPS) to local domains.  Today, a
+   secure context is obtained with a PKIX certificate ([RFC5280]) signed
+   by a Certification Authority that is trusted by the client.
 
-   This problem has been well recognized since about 2017 and several
+   However, servers on a local network cannot easily get PKIX
+   certificates signed by a Certification Authority because of their
+   firewall or NAT (to prove domain ownership), lack of domain name
+   delegation, and need for ongoing certificate renewal.
+
+   The problem has been well recognized since about 2017 and several
    proposals have been suggested to solve this problem, each with their
    own drawbacks.  This paper is not intended to summarize the proposals
    or their drawbacks; for that detail see the pointers to previous work
-   in Section 6.
-
-   At a high level, the proposals have involved solutions such as:
+   in Section 6.  At a high level, the proposals have involved solutions
+   such as:
 
    *  pre-shared secrets (scanned, printed, or displayed by the server)
 
@@ -109,11 +122,11 @@ Table of Contents
 
    *  Trust On First Use (TOFU), where a user verifies the first
       connection to a server and the client remembers that verification,
-      similar to common use of ssh.
+      similar to common use of ssh
 
    *  WebRTC and WebTransport, where a PKI-signed server provides a
       public key fingerprint of another server that it has previously
-      bootstrapped.
+      bootstrapped
 
    *  Encoding server's public key into the hostname [thomson-hld]
 
@@ -350,6 +363,11 @@ Table of Contents
    [iotsf]    "IOT Security Foundation", September 2015,
               <https://iotsecurityfoundation.org>.
 
+   [not-secure]
+              Google, "A secure web is here to stay", 2018,
+              <https://blog.chromium.org/2018/02/a-secure-web-is-here-
+              to-stay.html>.
+
    [phb-mesh] Hallam-Baker, P., "Mathematical Mesh", 2022,
               <https://github.com/hallambaker/Mathematical-Mesh>.
 
@@ -380,6 +398,10 @@ Table of Contents
    [RFC8952]  Larose, K., Dolson, D., and H. Liu, "Captive Portal
               Architecture", RFC 8952, DOI 10.17487/RFC8952, November
               2020, <https://www.rfc-editor.org/rfc/rfc8952>.
+
+   [sec-context]
+              W3C, "Secure Contexts", 2023,
+              <https://w3c.github.io/webappsec-secure-contexts/>.
 
    [shared]   W3C, "APPROACH-2: Using Shared Secret", September 2019,
               <https://httpslocal.github.io/proposals/#approach-2>.
