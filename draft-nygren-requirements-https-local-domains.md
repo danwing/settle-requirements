@@ -155,12 +155,12 @@ without relying on PKIX certificates.
 # Introduction
 
 Servers on local networks have historically used and encouraged
-unencrypted communications -- printers, routers, network attacked
+unencrypted communications -- printers, routers, network attached
 storage (NAS).  However, browsers disadvantage unencrypted
 communications (e.g., {{not-secure}}, {{sec-context}}) which increases
 importance of a secure context (HTTPS) to local domains.  Today, a
 secure context is obtained with a PKIX certificate ({{?RFC5280}})
-signed by a Certification Authority that is trusted by the client.
+signed by a Certification Authority (CA) that is trusted by the client.
 
 However, servers on a local network cannot easily get PKIX
 certificates signed by a Certification Authority because of their
@@ -169,7 +169,7 @@ delegation, and need for ongoing certificate renewal.
 
 The problem has been well recognized since about 2017 and several
 proposals have been suggested to solve this problem, each with their
-own drawbacks.  This paper is not intended to summarize the proposals
+own drawbacks.  This document is not intended to summarize these proposals
 or their drawbacks; for that detail see the pointers to previous work
 in {{related}}.  At a high level, the proposals have involved
 solutions such as:
@@ -178,7 +178,7 @@ solutions such as:
 
   * Public DNS pointing at local domain's IP address (e.g., {{plex}})
 
-  * Local Certificate Authority, where a Certificate Authority is
+  * Local Certification Authority, where a CA is
     added to client's certificate trust list and that CA signs
     certificates for devices within the local network
 
@@ -233,19 +233,19 @@ and where an attacker without the private key(s) is unable to access
 any state associated with the Web Origin.
 
 1. SHOULD abstract names from IP addresses.  Any given name should be
-able to have a mixture of IPv4, IPv6 LinkLocal (on an Interface), IPv6
+able to have a mixture of IPv4, IPv6 Link-Local (on an Interface), IPv6
 ULA, and IPv6 Globally-Routable addresses.  (For example, must be able
-to interact well with DNSSD)
+to interact well with DNSSD).
 
 1. Clients MUST be able to cryptographically validate that the
 authenticating server certificate of a service endpoint matches the
 identity in the URI / Web Origin URIs MUST be possible to construct
 that encapsulate a Web Origin and cryptographically bound identity
-information
+information.
 
 
 1. URIs MUST be possible to construct that encapsulate a Web Origin
-and cryptographically bound identity information
+and cryptographically bound identity information.
 
 1. It SHOULD be possible to have a way to represent a URI that
 includes a single specific IP address and the cryptographic identity
