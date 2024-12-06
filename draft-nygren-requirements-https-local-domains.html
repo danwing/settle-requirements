@@ -1177,10 +1177,13 @@ without relying on PKIX certificates.<a href="#section-abstract-2" class="pilcro
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-requirements" class="internal xref">Requirements</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-technical-requirements" class="internal xref">Technical Requirements</a></p>
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-naming" class="internal xref">Naming</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-human-factors-requirements" class="internal xref">Human Factors Requirements</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-technical-requirements" class="internal xref">Technical Requirements</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-human-factors-requirements" class="internal xref">Human Factors Requirements</a></p>
 </li>
             </ul>
 </li>
@@ -1288,126 +1291,149 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-requirements">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-requirements" class="section-name selfRef">Requirements</a>
       </h2>
-<div id="technical-requirements">
+<div id="naming">
 <section id="section-3.1">
-        <h3 id="name-technical-requirements">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-technical-requirements" class="section-name selfRef">Technical Requirements</a>
+        <h3 id="name-naming">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-naming" class="section-name selfRef">Naming</a>
         </h3>
-<ol start="1" type="1" class="normal type-1" id="section-3.1-1">
-<li id="section-3.1-1.1">
-            <p id="section-3.1-1.1.1">The Web Origin <span class="bcp14">MUST</span> be cryptographically bound to one or more key
+<p id="section-3.1-1">PKIX certificates are a centralized naming scheme derived from
+DNS. One of its significant characteristics is unique names.  These
+names have (the possibility of) being human-readable names.  But the
+most significant property is uniqueness -- each name has its own
+identity and that identity can be proven.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">A system that does not rely on PKIX or DNS lacks this inherient
+uniqueness property.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Without a centralized naming scheme, name collisions are possible and
+likely.  For example, it is likely that many networks will have a
+printer named, simply, "printer", much like many people might share a
+common name such as "John".  Humans prefer simple, human-readable
+names, but a strong identity cannot be created with such names: if
+two networks both have a printer named "printer", they are indistinguishable
+and if one responds when the other was expected, the mismatch will
+appear identical to an attack.  This would be unacceptable.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">R-UNIQUE-NAME: The system <span class="bcp14">MUST</span> have a way to uniquely name servers.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technical-requirements">
+<section id="section-3.2">
+        <h3 id="name-technical-requirements">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-technical-requirements" class="section-name selfRef">Technical Requirements</a>
+        </h3>
+<ol start="1" type="1" class="normal type-1" id="section-3.2-1">
+<li id="section-3.2-1.1">
+            <p id="section-3.2-1.1.1">The Web Origin <span class="bcp14">MUST</span> be cryptographically bound to one or more key
 pairs, where the private keying material is on the service endpoint
 and where an attacker without the private key(s) is unable to access
-any state associated with the Web Origin.<a href="#section-3.1-1.1.1" class="pilcrow">¶</a></p>
+any state associated with the Web Origin.<a href="#section-3.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.2">
-            <p id="section-3.1-1.2.1"><span class="bcp14">SHOULD</span> abstract names from IP addresses.  Any given name should be
+          <li id="section-3.2-1.2">
+            <p id="section-3.2-1.2.1"><span class="bcp14">SHOULD</span> abstract names from IP addresses.  Any given name should be
 able to have a mixture of IPv4, IPv6 LinkLocal (on an Interface), IPv6
 ULA, and IPv6 Globally-Routable addresses.  (For example, must be able
-to interact well with DNSSD)<a href="#section-3.1-1.2.1" class="pilcrow">¶</a></p>
+to interact well with DNSSD)<a href="#section-3.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.3">
-            <p id="section-3.1-1.3.1">Clients <span class="bcp14">MUST</span> be able to cryptographically validate that the
+          <li id="section-3.2-1.3">
+            <p id="section-3.2-1.3.1">Clients <span class="bcp14">MUST</span> be able to cryptographically validate that the
 authenticating server certificate of a service endpoint matches the
 identity in the URI / Web Origin URIs <span class="bcp14">MUST</span> be possible to construct
 that encapsulate a Web Origin and cryptographically bound identity
-information<a href="#section-3.1-1.3.1" class="pilcrow">¶</a></p>
+information<a href="#section-3.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.4">
-            <p id="section-3.1-1.4.1">URIs <span class="bcp14">MUST</span> be possible to construct that encapsulate a Web Origin
-and cryptographically bound identity information<a href="#section-3.1-1.4.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.4">
+            <p id="section-3.2-1.4.1">URIs <span class="bcp14">MUST</span> be possible to construct that encapsulate a Web Origin
+and cryptographically bound identity information<a href="#section-3.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.5">
-            <p id="section-3.1-1.5.1">It <span class="bcp14">SHOULD</span> be possible to have a way to represent a URI that
+          <li id="section-3.2-1.5">
+            <p id="section-3.2-1.5.1">It <span class="bcp14">SHOULD</span> be possible to have a way to represent a URI that
 includes a single specific IP address and the cryptographic identity
-of the service endpoint.<a href="#section-3.1-1.5.1" class="pilcrow">¶</a></p>
+of the service endpoint.<a href="#section-3.2-1.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.6">
-            <p id="section-3.1-1.6.1"><span class="bcp14">SHOULD</span>/<span class="bcp14">MUST NOT</span> have a reliance on central trust hierarchy or
-continued reliance on a service operated by a vendor.<a href="#section-3.1-1.6.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.6">
+            <p id="section-3.2-1.6.1"><span class="bcp14">SHOULD</span>/<span class="bcp14">MUST NOT</span> have a reliance on central trust hierarchy or
+continued reliance on a service operated by a vendor.<a href="#section-3.2-1.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.7">
-            <p id="section-3.1-1.7.1"><span class="bcp14">SHOULD</span> support key rotation (even if via 301 redirect) — Q: is it
+          <li id="section-3.2-1.7">
+            <p id="section-3.2-1.7.1"><span class="bcp14">SHOULD</span> support key rotation (even if via 301 redirect) — Q: is it
 acceptable to state to be lost here?  Note: likely can’t do 301 if
 doing TLS (HTTPS).  Is this suggestion to start HTTP and upgrade to
 HTTPS?  Could be useful for HTTPS but redirect unavailable for IPP,
-SMB, DoH.<a href="#section-3.1-1.7.1" class="pilcrow">¶</a></p>
+SMB, DoH.<a href="#section-3.2-1.7.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.8">
-            <p id="section-3.1-1.8.1"><span class="bcp14">MUST</span> support HTTPS, IPPS, DoH, DoT, SMB over QUIC<a href="#section-3.1-1.8.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.8">
+            <p id="section-3.2-1.8.1"><span class="bcp14">MUST</span> support HTTPS, IPPS, DoH, DoT, SMB over QUIC<a href="#section-3.2-1.8.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.9">
-            <p id="section-3.1-1.9.1"><span class="bcp14">SHOULD</span> support crypto agility (with more than one active key type)<a href="#section-3.1-1.9.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.9">
+            <p id="section-3.2-1.9.1"><span class="bcp14">SHOULD</span> support crypto agility (with more than one active key type)<a href="#section-3.2-1.9.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.10">
-            <p id="section-3.1-1.10.1"><span class="bcp14">SHOULD</span> support TLS SNI so a server knows which key pair/cert is
-expected<a href="#section-3.1-1.10.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.10">
+            <p id="section-3.2-1.10.1"><span class="bcp14">SHOULD</span> support TLS SNI so a server knows which key pair/cert is
+expected<a href="#section-3.2-1.10.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.11">
-            <p id="section-3.1-1.11.1"><span class="bcp14">SHOULD</span> support localhost uses as well (e.g., for sending a user to
-connect to a local service)<a href="#section-3.1-1.11.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.11">
+            <p id="section-3.2-1.11.1"><span class="bcp14">SHOULD</span> support localhost uses as well (e.g., for sending a user to
+connect to a local service)<a href="#section-3.2-1.11.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.12">
-            <p id="section-3.1-1.12.1"><span class="bcp14">SHOULD</span> support building trust relationships within devices in the
-local environment<a href="#section-3.1-1.12.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.12">
+            <p id="section-3.2-1.12.1"><span class="bcp14">SHOULD</span> support building trust relationships within devices in the
+local environment<a href="#section-3.2-1.12.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.13">
-            <p id="section-3.1-1.13.1"><span class="bcp14">SHOULD</span> integrate well with an evolution of
+          <li id="section-3.2-1.13">
+            <p id="section-3.2-1.13.1"><span class="bcp14">SHOULD</span> integrate well with an evolution of
 https://wicg.github.io/private-network-access/ and both allow for an
 improved model there but should also provide more robust solutions to
-vulnerabilities that it tries to address<a href="#section-3.1-1.13.1" class="pilcrow">¶</a></p>
+vulnerabilities that it tries to address<a href="#section-3.2-1.13.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.14">
-            <p id="section-3.1-1.14.1"><span class="bcp14">SHOULD</span> constrain to .local and .internal.  <span class="bcp14">MAY</span> constrain to the
+          <li id="section-3.2-1.14">
+            <p id="section-3.2-1.14.1"><span class="bcp14">SHOULD</span> constrain to .local and .internal.  <span class="bcp14">MAY</span> constrain to the
 DHCP domain-search value??  Should we also allow any arbitrary name if
-the IP address is local (RFC1918 address), too?<a href="#section-3.1-1.14.1" class="pilcrow">¶</a></p>
+the IP address is local (RFC1918 address), too?<a href="#section-3.2-1.14.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.15">
-            <p id="section-3.1-1.15.1"><span class="bcp14">MUST NOT</span> require ongoing vendor support or function, as vendors go
-out of business or lose interest in old equipment<a href="#section-3.1-1.15.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.15">
+            <p id="section-3.2-1.15.1"><span class="bcp14">MUST NOT</span> require ongoing vendor support or function, as vendors go
+out of business or lose interest in old equipment<a href="#section-3.2-1.15.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.16">
-            <p id="section-3.1-1.16.1">Device reset-to-factory settings <span class="bcp14">MUST NOT</span> require initial vendor
+          <li id="section-3.2-1.16">
+            <p id="section-3.2-1.16.1">Device reset-to-factory settings <span class="bcp14">MUST NOT</span> require initial vendor
 support, as vendors go out of business or lose interest in old
-equipment.<a href="#section-3.1-1.16.1" class="pilcrow">¶</a></p>
+equipment.<a href="#section-3.2-1.16.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.1-1.17">
-            <p id="section-3.1-1.17.1">Could this help with HTTPS access to Wi-Fi login portals
-(<span>[<a href="#RFC8952" class="cite xref">RFC8952</a>]</span>, <span>[<a href="#RFC8910" class="cite xref">RFC8910</a>]</span>)?<a href="#section-3.1-1.17.1" class="pilcrow">¶</a></p>
+          <li id="section-3.2-1.17">
+            <p id="section-3.2-1.17.1">Could this help with HTTPS access to Wi-Fi login portals
+(<span>[<a href="#RFC8952" class="cite xref">RFC8952</a>]</span>, <span>[<a href="#RFC8910" class="cite xref">RFC8910</a>]</span>)?<a href="#section-3.2-1.17.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
 </div>
 <div id="human-factors-requirements">
-<section id="section-3.2">
+<section id="section-3.3">
         <h3 id="name-human-factors-requirements">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-human-factors-requirements" class="section-name selfRef">Human Factors Requirements</a>
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-human-factors-requirements" class="section-name selfRef">Human Factors Requirements</a>
         </h3>
-<ol start="1" type="1" class="normal type-1" id="section-3.2-1">
-<li id="section-3.2-1.1">
-            <p id="section-3.2-1.1.1"><span class="bcp14">SHOULD</span> have a way to do discovery of endpoints and their identities
-(for example, via DNSSD?)<a href="#section-3.2-1.1.1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.3-1">
+<li id="section-3.3-1.1">
+            <p id="section-3.3-1.1.1"><span class="bcp14">SHOULD</span> have a way to do discovery of endpoints and their identities
+(for example, via DNSSD?)<a href="#section-3.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.2-1.2">
-            <p id="section-3.2-1.2.1"><span class="bcp14">SHOULD</span> have human factors and adversarial testing on proposed
+          <li id="section-3.3-1.2">
+            <p id="section-3.3-1.2.1"><span class="bcp14">SHOULD</span> have human factors and adversarial testing on proposed
 solutions to make sure that this solution provides a reasonable
 experience to average and novice end-users and does not introduce new
-security exploitation vectors<a href="#section-3.2-1.2.1" class="pilcrow">¶</a></p>
+security exploitation vectors<a href="#section-3.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.2-1.3">
-            <p id="section-3.2-1.3.1"><span class="bcp14">SHOULD</span> have a URI that users can Bookmark to create an association
+          <li id="section-3.3-1.3">
+            <p id="section-3.3-1.3.1"><span class="bcp14">SHOULD</span> have a URI that users can Bookmark to create an association
 to a friendly name.  Further detail: Can URL bar of the browser honor
 mDNS/DNSSD advertised names, or give a pull-down of them similar to
 how the “add printer” dialog does for printers?  This would help ease
 the use of long FQDN so it’s almost as easy as router.local.
 Especially if it could show a nickname that is configured by the
-printer.<a href="#section-3.2-1.3.1" class="pilcrow">¶</a></p>
+printer.<a href="#section-3.3-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.2-1.4">
-            <p id="section-3.2-1.4.1">(<span class="bcp14">SHOULD</span>?) have a way to represent these URIs to humans in a
+          <li id="section-3.3-1.4">
+            <p id="section-3.3-1.4.1">(<span class="bcp14">SHOULD</span>?) have a way to represent these URIs to humans in a
 consistent, readhable, and non-confusing fashion.  (In a browser,
 users shouldn’t see the key fingerprint by default but rather a
-representation of its presence)<a href="#section-3.2-1.4.1" class="pilcrow">¶</a></p>
+representation of its presence)<a href="#section-3.3-1.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 </section>
