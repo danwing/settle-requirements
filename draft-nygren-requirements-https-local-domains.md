@@ -124,9 +124,28 @@ informative:
        org: W3C
      target: https://github.com/httpslocal
 
+  sec-context:
+     title: "Secure Contexts"
+     date: 2023
+     author:
+       org: W3C
+     target: https://w3c.github.io/webappsec-secure-contexts/
 
+  not-secure:
+     title: "A secure web is here to stay"
+     date: 2018
+     author:
+       org: Google
+     target: https://blog.chromium.org/2018/02/a-secure-web-is-here-to-stay.html
 
 --- abstract
+
+When connecting to servers on their local network, users are
+surprised to encounter user interfaces that display errors,
+show insecure connections, and block some HTTP features
+when missing a secure context.  However, obtaining PKIX
+certificates for those servers is difficult for a variety
+of reasons.
 
 This document explores requirements for authenticating local servers
 without relying on PKIX certificates.
@@ -135,18 +154,25 @@ without relying on PKIX certificates.
 
 # Introduction
 
-Servers on a local network cannot easily get PKIX certificates
-{{?RFC5280}} signed by a public Certification Authority because of
-their firewall or NAT, lack of domain name delegation, and need for
-ongoing certificate renewal.
+Servers on local networks have historically used and encouraged
+unencrypted communications -- printers, routers, network attacked
+storage (NAS).  However, browsers disadvantage unencrypted
+communications (e.g., {{not-secure}}, {{sec-context}}) which increases
+importance of a secure context (HTTPS) to local domains.  Today, a
+secure context is obtained with a PKIX certificate ({{?RFC5280}})
+signed by a Certification Authority that is trusted by the client.
 
-This problem has been well recognized since about 2017 and several
-proposals have been suggested to solve this problem, each
-with their own drawbacks.  This paper is not intended to summarize
-the proposals or their drawbacks; for that detail see the
-pointers to previous work in {{related}}.
+However, servers on a local network cannot easily get PKIX
+certificates signed by a Certification Authority because of their
+firewall or NAT (to prove domain ownership), lack of domain name
+delegation, and need for ongoing certificate renewal.
 
-At a high level, the proposals have involved solutions such as:
+The problem has been well recognized since about 2017 and several
+proposals have been suggested to solve this problem, each with their
+own drawbacks.  This paper is not intended to summarize the proposals
+or their drawbacks; for that detail see the pointers to previous work
+in {{related}}.  At a high level, the proposals have involved
+solutions such as:
 
   * pre-shared secrets (scanned, printed, or displayed by the server)
 
@@ -158,11 +184,11 @@ At a high level, the proposals have involved solutions such as:
 
   * Trust On First Use (TOFU), where a user verifies the first
     connection to a server and the client remembers that verification,
-    similar to common use of ssh.
+    similar to common use of ssh
 
   * WebRTC and WebTransport, where a PKI-signed server provides a
     public key fingerprint of another server that it has previously
-    bootstrapped.
+    bootstrapped
 
   * Encoding server's public key into the hostname {{thomson-hld}}
 
