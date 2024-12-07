@@ -210,13 +210,12 @@ authentication system for local hosts.
 
 ## Naming
 
-PKIX certificates are a centralized naming scheme derived from
-DNS. One of its significant characteristics is unique names.  These
-names have (the possibility of) being human-readable names.  But the
-most significant property is uniqueness -- each name has its own
+PKIX certificates are a centralized naming scheme derived from DNS.
+These names have (the possibility of) being human-readable names.  But
+the most significant property is uniqueness -- each name has its own
 identity and that identity can be proven.
 
-A system that does not rely on PKIX or DNS lacks this inherient
+A system that does not rely on centralized naming lacks this inherient
 uniqueness property.
 
 Without a centralized naming scheme, name collisions are possible and
