@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-05T00:41:23.836403+00:00",
+  "timestamp": "2024-12-08T00:44:52.013576+00:00",
   "repo": "danwing/requirements-https-local-domains",
   "labels": [
     {
@@ -65,7 +65,189 @@
       "updatedAt": "2024-11-28T00:49:15Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDONNWq_86iQcPC",
+      "title": "abstract from adress",
+      "url": "https://github.com/danwing/requirements-https-local-domains/issues/5",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/danwing/requirements-https-local-domains/blob/6ee2a8efe7d8305d60f5f25835f4aafa60a3db5a/draft-nygren-requirements-https-local-domains.md?plain=1#L235C1-L235C45\r\n\r\nWhat is actually meant here? what is the reasoning behind?",
+      "createdAt": "2024-12-06T06:59:46Z",
+      "updatedAt": "2024-12-06T15:45:48Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "OWNER",
+          "body": "That was written by Erik. I believe the intended meaning is \"do not encode IP address into the name\", like what Plex does.  My guess is because Plex's solution requires allowing DNS rebinding attack.  But I'm not entirely sure I understand that requirement.  ",
+          "createdAt": "2024-12-06T15:45:47Z",
+          "updatedAt": "2024-12-06T15:45:47Z"
+        }
+      ]
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDONNWq_86EQoOZ",
+      "title": "unique name requirement",
+      "url": "https://github.com/danwing/requirements-https-local-domains/pull/2",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-06T01:19:10Z",
+      "updatedAt": "2024-12-06T01:50:48Z",
+      "baseRepository": "danwing/requirements-https-local-domains",
+      "baseRefName": "main",
+      "baseRefOid": "1d5552fdcc19b84e3bf6793284cd320e939dcc60",
+      "headRepository": "danwing/requirements-https-local-domains",
+      "headRefName": "unique-name",
+      "headRefOid": "e42fdfac6aa8041038734285f82f32d5d19e660e",
+      "closedAt": "2024-12-06T01:50:48Z",
+      "mergedAt": "2024-12-06T01:50:48Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "6ee2a8efe7d8305d60f5f25835f4aafa60a3db5a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDONNWq_86EQqH6",
+      "title": "extend abstract and intro",
+      "url": "https://github.com/danwing/requirements-https-local-domains/pull/3",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-06T01:24:20Z",
+      "updatedAt": "2024-12-06T01:50:35Z",
+      "baseRepository": "danwing/requirements-https-local-domains",
+      "baseRefName": "main",
+      "baseRefOid": "1d5552fdcc19b84e3bf6793284cd320e939dcc60",
+      "headRepository": "danwing/requirements-https-local-domains",
+      "headRefName": "abstract_intro",
+      "headRefOid": "cd4d52f4f79580b8eb4d0afca090e14a095ef511",
+      "closedAt": "2024-12-06T01:50:35Z",
+      "mergedAt": "2024-12-06T01:50:35Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "f8e623a539537c0ceb66994d24dc740d76dcf7e2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDONNWq_86ESAQZ",
+      "title": "few nits",
+      "url": "https://github.com/danwing/requirements-https-local-domains/pull/4",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-06T06:58:35Z",
+      "updatedAt": "2024-12-06T15:46:49Z",
+      "baseRepository": "danwing/requirements-https-local-domains",
+      "baseRefName": "main",
+      "baseRefOid": "6ee2a8efe7d8305d60f5f25835f4aafa60a3db5a",
+      "headRepository": "danwing/requirements-https-local-domains",
+      "headRefName": "boucadair-patch-1",
+      "headRefOid": "371207e669bc6582873f6e952147c82dd57b30b1",
+      "closedAt": "2024-12-06T15:46:49Z",
+      "mergedAt": "2024-12-06T15:46:49Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "3da2739004d9f66ed00e8ab8d9f945c80ff50cac"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONNWq_86UILYa",
+          "commit": {
+            "abbreviatedOid": "371207e"
+          },
+          "author": "danwing",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-06T15:46:42Z",
+          "updatedAt": "2024-12-06T15:46:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDONNWq_86EYyD9",
+      "title": "organized requirements into sections where possible; else, just gave everything its own citable section and R- requirement",
+      "url": "https://github.com/danwing/requirements-https-local-domains/pull/6",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-07T00:07:02Z",
+      "updatedAt": "2024-12-07T07:18:03Z",
+      "baseRepository": "danwing/requirements-https-local-domains",
+      "baseRefName": "main",
+      "baseRefOid": "3da2739004d9f66ed00e8ab8d9f945c80ff50cac",
+      "headRepository": "danwing/requirements-https-local-domains",
+      "headRefName": "organized",
+      "headRefOid": "687e9f2bd78d04b8473acc53c8fa54e658215ea0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONNWq_86UM8nl",
+          "commit": {
+            "abbreviatedOid": "687e9f2"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "reorg of content looks better. Thanks",
+          "createdAt": "2024-12-07T07:11:37Z",
+          "updatedAt": "2024-12-07T07:18:03Z",
+          "comments": [
+            {
+              "originalPosition": 77,
+              "body": "```suggestion\r\nAny given name should be resolvable to a mixture of IPv4, IPv6\r\n```",
+              "createdAt": "2024-12-07T07:11:38Z",
+              "updatedAt": "2024-12-07T07:18:03Z"
+            },
+            {
+              "originalPosition": 107,
+              "body": "```suggestion\r\n  protocols, especially HTTPS, IPPS, DoH, DoT, ande SMB over QUIC.\r\n```",
+              "createdAt": "2024-12-07T07:12:15Z",
+              "updatedAt": "2024-12-07T07:18:03Z"
+            },
+            {
+              "originalPosition": 157,
+              "body": "```suggestion\r\n## Misc.\r\n```",
+              "createdAt": "2024-12-07T07:17:06Z",
+              "updatedAt": "2024-12-07T07:18:03Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
