@@ -215,7 +215,7 @@ Table of Contents
 
       R-ABSTRACT: The solution SHOULD abstract names from IP addresses.
 
-   Any given name should be able to have a mixture of IPv4, IPv6 Link-
+   Any given name should be resolvable to a mixture of IPv4, IPv6 Link-
    Local (on an Interface), IPv6 ULA, and IPv6 Globally-Routable
    addresses.  Operating a local DNS is beyond the scope of many
    administrators, so being able to advertise the server using [DNS-SD]
@@ -242,7 +242,7 @@ Table of Contents
 3.5.  Multiple Application Protocols
 
       R-MULT-APP: A solution MUST support various application-level
-      protocols such as HTTPS, IPPS, DoH, DoT, SMB over QUIC, and so on.
+      protocols, especially HTTPS, IPPS, DoH, DoT, ande SMB over QUIC.
 
 3.6.  Cryptographic Agility
 
