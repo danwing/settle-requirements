@@ -336,7 +336,7 @@ woods).
   unavailable.
 
 
-## Misc.
+## Miscellaneous
 
 1. It SHOULD be possible to have a way to represent a URI that
 includes a single specific IP address and the cryptographic identity
