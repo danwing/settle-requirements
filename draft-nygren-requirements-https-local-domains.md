@@ -291,7 +291,7 @@ old products. The products may still be operational.
 ## Multiple Application Protocols
 
 > R-MULT-APP: A solution MUST support various application-level
-  protocols such as HTTPS, IPPS, DoH, DoT, SMB over QUIC, and so on.
+  protocols, especially HTTPS, IPPS, DoH, DoT, ande SMB over QUIC.
 
 
 ## Cryptographic Agility
