@@ -88,7 +88,7 @@ Table of Contents
      3.9.  W3C Private Network Access
      3.10. Constrain to Local Resources
      3.11. Operate Standalone
-     3.12. Technical Requirements
+     3.12. Misc.
    4.  Human Factors Requirements
      4.1.  Discoverable
      4.2.  Easy to Use
@@ -283,7 +283,7 @@ Table of Contents
       R-STANDALONE: MUST operate securely while Internet connectivity is
       unavailable.
 
-3.12.  Technical Requirements
+3.12.  Misc.
 
    1.  It SHOULD be possible to have a way to represent a URI that
        includes a single specific IP address and the cryptographic
