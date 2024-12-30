@@ -306,7 +306,7 @@ key pair/cert is expected.
 
 ## Localhost
 
-> R-LOCALHOST: A solution SHOULD support localhost uses as well (e.g.,
+> R-LOCALHOST: A solution SHOULD support "localhost" (e.g.,
 for sending a user to connect to a local service)
 
 
@@ -324,6 +324,16 @@ address
 > Discuss: MAY constrain to the DHCP domain-search value??  Should we
 also allow any arbitrary name if the IP address is local (RFC1918
 address), too?
+
+## Operate Standalone
+
+After configuration, the system needs to operate without a
+connection to the Internet.  This is necessary because Internet
+connectivity is sometimes flaky or unavailable (e.g., cabin in the
+woods).
+
+> R-STANDALONE: MUST operate securely while Internet connectivity is
+  unavailable.
 
 
 ## Technical Requirements
