@@ -145,6 +145,13 @@ informative:
        org: Google
      target: https://blog.chromium.org/2018/02/a-secure-web-is-here-to-stay.html
 
+  smb-quic:
+     title: "SMB over QUIC"
+     date: December 2024
+     author:
+       org: Microsoft
+     target: https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-over-quic
+
 --- abstract
 
 When connecting to servers on their local network, users are
@@ -290,8 +297,12 @@ old products. The products may still be operational.
 
 ## Multiple Application Protocols
 
-> R-MULT-APP: A solution MUST support various application-level
-  protocols, especially HTTPS, IPPS, DoH, DoT, ande SMB over QUIC.
+> R-HTTPS: A solution MUST support HTTPS.
+
+> R-MULT-APP: A solution SHOULD support other application-level
+  protocols such as IPPS {{?RFC7472}}, DoT {{?RFC7858}}, SMB over
+  QUIC {{smb-quic}}, IMAP {{?RFC8314}}, and SIP {{?RFC3261}}, as
+  those protocols are routinely served with a local domain.
 
 
 ## Cryptographic Agility
