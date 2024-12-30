@@ -261,7 +261,7 @@ reconfiguration.
 
 > R-ABSTRACT: The solution SHOULD abstract names from IP addresses.
 
-Any given name should be able to have a mixture of IPv4, IPv6
+Any given name should be resolvable to a mixture of IPv4, IPv6
 Link-Local (on an Interface), IPv6 ULA, and IPv6 Globally-Routable
 addresses. Operating a local DNS is beyond the scope of many
 administrators, so being able to advertise the server using
