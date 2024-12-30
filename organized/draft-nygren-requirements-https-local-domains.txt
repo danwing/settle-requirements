@@ -5,8 +5,8 @@
 Network Working Group                                          E. Nygren
 Internet-Draft                                       Akamai Technologies
 Intended status: Informational                                   D. Wing
-Expires: 10 June 2025                               Cloud Software Group
-                                                         7 December 2024
+Expires: 3 July 2025                                Cloud Software Group
+                                                        30 December 2024
 
 
                 Requirements for HTTPS for Local Domains
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 June 2025.
+   This Internet-Draft will expire on 3 July 2025.
 
 Copyright Notice
 
@@ -87,7 +87,8 @@ Table of Contents
      3.8.  Localhost
      3.9.  W3C Private Network Access
      3.10. Constrain to Local Resources
-     3.11. Technical Requirements
+     3.11. Operate Standalone
+     3.12. Technical Requirements
    4.  Human Factors Requirements
      4.1.  Discoverable
      4.2.  Easy to Use
@@ -255,8 +256,8 @@ Table of Contents
 
 3.8.  Localhost
 
-      R-LOCALHOST: A solution SHOULD support localhost uses as well
-      (e.g., for sending a user to connect to a local service)
+      R-LOCALHOST: A solution SHOULD support "localhost" (e.g., for
+      sending a user to connect to a local service)
 
 3.9.  W3C Private Network Access
 
@@ -273,7 +274,16 @@ Table of Contents
       we also allow any arbitrary name if the IP address is local
       (RFC1918 address), too?
 
-3.11.  Technical Requirements
+3.11.  Operate Standalone
+
+   After configuration, the system needs to operate without a connection
+   to the Internet.  This is necessary because Internet connectivity is
+   sometimes flaky or unavailable (e.g., cabin in the woods).
+
+      R-STANDALONE: MUST operate securely while Internet connectivity is
+      unavailable.
+
+3.12.  Technical Requirements
 
    1.  It SHOULD be possible to have a way to represent a URI that
        includes a single specific IP address and the cryptographic
