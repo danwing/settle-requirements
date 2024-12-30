@@ -241,8 +241,12 @@ Table of Contents
 
 3.5.  Multiple Application Protocols
 
-      R-MULT-APP: A solution MUST support various application-level
-      protocols, especially HTTPS, IPPS, DoH, DoT, ande SMB over QUIC.
+      R-HTTPS: A solution MUST support HTTPS.
+
+      R-MULT-APP: A solution SHOULD support other application-level
+      protocols such as IPPS [RFC7472], DoT [RFC7858], SMB over QUIC
+      [smb-quic], IMAP [RFC8314], and SIP [RFC3261], as those protocols
+      are routinely served with a local domain.
 
 3.6.  Cryptographic Agility
 
@@ -493,6 +497,12 @@ Table of Contents
               June 2015, <https://words.filippo.io/how-plex-is-doing-
               https-for-all-its-users/>.
 
+   [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
+              A., Peterson, J., Sparks, R., Handley, M., and E.
+              Schooler, "SIP: Session Initiation Protocol", RFC 3261,
+              DOI 10.17487/RFC3261, June 2002,
+              <https://www.rfc-editor.org/rfc/rfc3261>.
+
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -503,6 +513,16 @@ Table of Contents
               (IPP) over HTTPS Transport Binding and the 'ipps' URI
               Scheme", RFC 7472, DOI 10.17487/RFC7472, March 2015,
               <https://www.rfc-editor.org/rfc/rfc7472>.
+
+   [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
+              and P. Hoffman, "Specification for DNS over Transport
+              Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
+              2016, <https://www.rfc-editor.org/rfc/rfc7858>.
+
+   [RFC8314]  Moore, K. and C. Newman, "Cleartext Considered Obsolete:
+              Use of Transport Layer Security (TLS) for Email Submission
+              and Access", RFC 8314, DOI 10.17487/RFC8314, January 2018,
+              <https://www.rfc-editor.org/rfc/rfc8314>.
 
    [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
               Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
@@ -523,6 +543,10 @@ Table of Contents
 
    [shared]   W3C, "APPROACH-2: Using Shared Secret", September 2019,
               <https://httpslocal.github.io/proposals/#approach-2>.
+
+   [smb-quic] Microsoft, "SMB over QUIC", December 2024,
+              <https://learn.microsoft.com/en-us/windows-server/storage/
+              file-server/smb-over-quic>.
 
    [stark]    Stark, E. M., "When a web PKI certificate won't cut it",
               December 2021, <https://emilymstark.com/2021/12/24/when-a-

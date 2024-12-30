@@ -1472,8 +1472,15 @@ old products. The products may still be operational.<a href="#section-3.4-3" cla
         </h3>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.5-1.1">
-            <p id="section-3.5-1.1.1">R-MULT-APP: A solution <span class="bcp14">MUST</span> support various application-level
-  protocols, especially HTTPS, IPPS, DoH, DoT, ande SMB over QUIC.<a href="#section-3.5-1.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.5-1.1.1">R-HTTPS: A solution <span class="bcp14">MUST</span> support HTTPS.<a href="#section-3.5-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5-2.1">
+            <p id="section-3.5-2.1.1">R-MULT-APP: A solution <span class="bcp14">SHOULD</span> support other application-level
+  protocols such as IPPS <span>[<a href="#RFC7472" class="cite xref">RFC7472</a>]</span>, DoT <span>[<a href="#RFC7858" class="cite xref">RFC7858</a>]</span>, SMB over
+  QUIC <span>[<a href="#smb-quic" class="cite xref">smb-quic</a>]</span>, IMAP <span>[<a href="#RFC8314" class="cite xref">RFC8314</a>]</span>, and SIP <span>[<a href="#RFC3261" class="cite xref">RFC3261</a>]</span>, as
+  those protocols are routinely served with a local domain.<a href="#section-3.5-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1907,6 +1914,10 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
         <dd>
 <span class="refAuthor">Valsorda, F.</span>, <span class="refTitle">"How Plex Is Doing Https for All Its Users"</span>, <time datetime="2015-06" class="refDate">June 2015</time>, <span>&lt;<a href="https://words.filippo.io/how-plex-is-doing-https-for-all-its-users/">https://words.filippo.io/how-plex-is-doing-https-for-all-its-users/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC3261">[RFC3261]</dt>
+        <dd>
+<span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Camarillo, G.</span>, <span class="refAuthor">Johnston, A.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Sparks, R.</span>, <span class="refAuthor">Handley, M.</span>, and <span class="refAuthor">E. Schooler</span>, <span class="refTitle">"SIP: Session Initiation Protocol"</span>, <span class="seriesInfo">RFC 3261</span>, <span class="seriesInfo">DOI 10.17487/RFC3261</span>, <time datetime="2002-06" class="refDate">June 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3261">https://www.rfc-editor.org/rfc/rfc3261</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC5280">[RFC5280]</dt>
         <dd>
 <span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a>&gt;</span>. </dd>
@@ -1914,6 +1925,14 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
 <dt id="RFC7472">[RFC7472]</dt>
         <dd>
 <span class="refAuthor">McDonald, I.</span> and <span class="refAuthor">M. Sweet</span>, <span class="refTitle">"Internet Printing Protocol (IPP) over HTTPS Transport Binding and the 'ipps' URI Scheme"</span>, <span class="seriesInfo">RFC 7472</span>, <span class="seriesInfo">DOI 10.17487/RFC7472</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7472">https://www.rfc-editor.org/rfc/rfc7472</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7858">[RFC7858]</dt>
+        <dd>
+<span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Zhu, L.</span>, <span class="refAuthor">Heidemann, J.</span>, <span class="refAuthor">Mankin, A.</span>, <span class="refAuthor">Wessels, D.</span>, and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Specification for DNS over Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 7858</span>, <span class="seriesInfo">DOI 10.17487/RFC7858</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7858">https://www.rfc-editor.org/rfc/rfc7858</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8314">[RFC8314]</dt>
+        <dd>
+<span class="refAuthor">Moore, K.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Cleartext Considered Obsolete: Use of Transport Layer Security (TLS) for Email Submission and Access"</span>, <span class="seriesInfo">RFC 8314</span>, <span class="seriesInfo">DOI 10.17487/RFC8314</span>, <time datetime="2018-01" class="refDate">January 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8314">https://www.rfc-editor.org/rfc/rfc8314</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8799">[RFC8799]</dt>
         <dd>
@@ -1934,6 +1953,10 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
 <dt id="shared">[shared]</dt>
         <dd>
 <span class="refAuthor">W3C</span>, <span class="refTitle">"APPROACH-2: Using Shared Secret"</span>, <time datetime="2019-09" class="refDate">September 2019</time>, <span>&lt;<a href="https://httpslocal.github.io/proposals/#approach-2">https://httpslocal.github.io/proposals/#approach-2</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="smb-quic">[smb-quic]</dt>
+        <dd>
+<span class="refAuthor">Microsoft</span>, <span class="refTitle">"SMB over QUIC"</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-over-quic">https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-over-quic</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="stark">[stark]</dt>
         <dd>
