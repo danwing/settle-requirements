@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-29T00:41:53.280599+00:00",
+  "timestamp": "2024-12-31T00:37:31.774005+00:00",
   "repo": "danwing/requirements-https-local-domains",
   "labels": [
     {
@@ -195,24 +195,26 @@
       "id": "PR_kwDONNWq_86EYyD9",
       "title": "organized requirements into sections where possible; else, just gave everything its own citable section and R- requirement",
       "url": "https://github.com/danwing/requirements-https-local-domains/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-12-07T00:07:02Z",
-      "updatedAt": "2024-12-07T07:18:03Z",
+      "updatedAt": "2024-12-30T17:11:38Z",
       "baseRepository": "danwing/requirements-https-local-domains",
       "baseRefName": "main",
       "baseRefOid": "3da2739004d9f66ed00e8ab8d9f945c80ff50cac",
       "headRepository": "danwing/requirements-https-local-domains",
       "headRefName": "organized",
-      "headRefOid": "687e9f2bd78d04b8473acc53c8fa54e658215ea0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "36cace3b12e226af5e6291bc3976c924e7afdee9",
+      "closedAt": "2024-12-30T17:11:38Z",
+      "mergedAt": "2024-12-30T17:11:38Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "ebe0de5c44e5e66f52a7feec249d1a161c41cb67"
+      },
       "comments": [],
       "reviews": [
         {
