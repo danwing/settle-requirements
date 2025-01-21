@@ -2,16 +2,16 @@
 
 This is the working area for the individual Internet-Draft, "Requirements for HTTPS for Local Domains".
 
-* [Editor's Copy](https://danwing.github.io/requirements-https-local-domains/#go.draft-wing-settle-requirements.html)
+* [Editor's Copy](https://danwing.github.io/settle-requirements/#go.draft-wing-settle-requirements.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-wing-settle-requirements)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-wing-settle-requirements)
-* [Compare Editor's Copy to Individual Draft](https://danwing.github.io/requirements-https-local-domains/#go.draft-wing-settle-requirements.diff)
+* [Compare Editor's Copy to Individual Draft](https://danwing.github.io/settle-requirements/#go.draft-wing-settle-requirements.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/danwing/requirements-https-local-domains/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/danwing/settle-requirements/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.

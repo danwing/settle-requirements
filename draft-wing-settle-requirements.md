@@ -25,8 +25,8 @@ venue:
   type: ""
   mail: settle@ietf.org
   arch: https://mailarchive.ietf.org/arch/browse/settle/
-  github: "danwing/requirements-https-local-domains"
-  latest: "https://danwing.github.io/requirements-https-local-domains/draft-wing-settle-requirements.html"
+  github: "danwing/settle-requirements"
+  latest: "https://danwing.github.io/settle-requirements/draft-wing-settle-requirements.html"
 
 author:
  -
