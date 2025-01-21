@@ -1,9 +1,9 @@
 ---
 title: "Requirements for HTTPS for Local Domains"
-abbrev: "HTTPS for Local: Requirements"
+abbrev: "Requirements for HTTPS for Local Domains"
 category: info
 
-docname: draft-wing-requirements-https-local-domains-latest
+docname: draft-wing-settle-requirements-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -26,7 +26,7 @@ venue:
   mail: settle@ietf.org
   arch: https://mailarchive.ietf.org/arch/browse/settle/
   github: "danwing/requirements-https-local-domains"
-  latest: "https://danwing.github.io/requirements-https-local-domains/draft-wing-requirements-https-local-domains.html"
+  latest: "https://danwing.github.io/requirements-https-local-domains/draft-wing-settle-requirements.html"
 
 author:
  -
