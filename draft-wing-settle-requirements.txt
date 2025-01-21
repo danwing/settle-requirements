@@ -10,7 +10,7 @@ Expires: 25 July 2025                                Akamai Technologies
 
 
                 Requirements for HTTPS for Local Domains
-           draft-wing-requirements-https-local-domains-latest
+                 draft-wing-settle-requirements-latest
 
 Abstract
 
@@ -29,9 +29,9 @@ About This Document
 
    The latest revision of this draft can be found at
    https://danwing.github.io/requirements-https-local-domains/draft-
-   wing-requirements-https-local-domains.html.  Status information for
-   this document may be found at https://datatracker.ietf.org/doc/draft-
-   wing-requirements-https-local-domains/.
+   wing-settle-requirements.html.  Status information for this document
+   may be found at https://datatracker.ietf.org/doc/draft-wing-settle-
+   requirements/.
 
    Discussion of this document takes place on the SETTLE mailing list
    (mailto:settle@ietf.org), which is archived at
