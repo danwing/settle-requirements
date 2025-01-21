@@ -3,7 +3,7 @@ title: "Requirements for HTTPS for Local Domains"
 abbrev: "HTTPS for Local: Requirements"
 category: info
 
-docname: draft-nygren-requirements-https-local-domains-latest
+docname: draft-wing-requirements-https-local-domains-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -26,20 +26,20 @@ venue:
   mail: settle@ietf.org
   arch: https://mailarchive.ietf.org/arch/browse/settle/
   github: "danwing/requirements-https-local-domains"
-  latest: "https://danwing.github.io/requirements-https-local-domains/draft-nygren-requirements-https-local-domains.html"
+  latest: "https://danwing.github.io/requirements-https-local-domains/draft-wing-requirements-https-local-domains.html"
 
 author:
+ -
+    ins: D. Wing
+    name: Dan Wing
+    organization: Cloud Software Group, Inc.
+    abbrev: Citrix
+    email: danwing@gmail.com
  -
     fullname: Erik Nygren
     organization: Akamai Technologies
     email: erik+ietf@nygren.org
     uri: http://erik.nygren.org/
- -
-    ins: D. Wing
-    name: Dan Wing
-    organization: Cloud Software Group Holdings, Inc.
-    abbrev: Cloud Software Group
-    email: danwing@gmail.com
 
 
 
@@ -356,11 +356,12 @@ of the service endpoint.
 > Discuss: the above requirement needs to be re-written.
 
 
-1. SHOULD support key rotation (even if via 301 redirect) — Q: is it
-acceptable to state to be lost here?  Note: likely can’t do 301 if
-doing TLS (HTTPS).  Is this suggestion to start HTTP and upgrade to
-HTTPS?  Could be useful for HTTPS but redirect unavailable for IPP,
-SMB, DoH.
+1. SHOULD support key rotation (even if via 301 redirect)
+
+* Q: is it acceptable to state to be lost here?  Note: likely cannot
+do 301 if doing TLS (HTTPS).  Is this suggestion to start HTTP and
+upgrade to HTTPS?  Could be useful for HTTPS but redirect unavailable
+for IPP, SMB, DoH.
 
 > Discuss: the above requirement needs to be re-written.
 
@@ -398,16 +399,16 @@ introduce new security exploitation vectors
 to a friendly name.
 
 > Discussion: Can URL bar of the browser honor mDNS/DNSSD advertised
-names, or give a pull-down of them similar to how the “add printer”
+names, or give a pull-down of them similar to how the "add printer"
 dialog does for printers?  This would help ease the use of long FQDN
-so it’s almost as easy as router.local.  Especially if it could show a
+so it's almost as easy as router.local.  Especially if it could show a
 nickname that is configured by the printer.
 
 ## Human-friendly Name
 
 > R-CONSISTENT: A solution SHOULD represent these URIs to humans in a
 consistent, readable, and non-confusing fashion.  (In a browser,
-users shouldn’t see the key fingerprint by default but rather a
+users shouldn't see the key fingerprint by default but rather a
 representation of its presence)
 
 
@@ -415,8 +416,9 @@ representation of its presence)
 
 ## Key Rotation
 
-1. Is it acceptable for the Web Origin to change as part of key rotations?
-A: no, this doesn’t happen today and changing the web origin would violate the principle of least surprise.
+1. Is it acceptable for the Web Origin to change as part of key
+rotations?  A: no, this does not happen today and changing the web
+origin would violate the principle of least surprise.
 
 ## Trust on First Use (TOFU)
 
@@ -449,7 +451,7 @@ How does a solution tie into systems like Matter/Thread that have their own trus
 
 # Use Cases
 
-For the below, “Secure communications” means being able to make a TLS
+For the below, "Secure communications" means being able to make a TLS
 connection to a service such that the service is able to authenticate
 itself in a way to prevent MitM attacks.  The security model must be
 TOFU at a minimum, but when the identity of a service is none it
