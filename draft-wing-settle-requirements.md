@@ -72,6 +72,13 @@ informative:
      date: 2022
      target: https://github.com/hallambaker/Mathematical-Mesh
 
+  zookotriangle:
+     title: "Zooko's triangle"
+     author:
+       org: Wikipedia
+     target: "https://en.wikipedia.org/wiki/Zooko%27s_triangle"
+     date: March 2025
+
   iotops-suib-prezo:
      title: "SUIB: Browsing local web resources in a secure usable manner"
      author:
@@ -155,6 +162,13 @@ informative:
        org: Microsoft
      target: https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-over-quic
 
+  everywhere:
+     title: "HTTPS Everywhere"
+     date: March 2025
+     author:
+       org: EFF
+     target: "https://www.eff.org/https-everywhere"
+
 --- abstract
 
 When connecting to servers on their local network, users are
@@ -164,25 +178,29 @@ when missing a secure context.  However, obtaining PKIX
 certificates for those servers is difficult for a variety
 of reasons.
 
-This document explores requirements for authenticating local servers
-without relying on PKIX certificates.
+This document explores requirements for authenticating local servers.
 
 --- middle
 
 # Introduction
 
-Servers on local networks have historically used and encouraged
+Servers on local networks have historically settled for
 unencrypted communications -- printers, routers, network attached
-storage (NAS).  However, browsers disadvantage unencrypted
-communications (e.g., {{not-secure}}, {{sec-context}}) which increases
-importance of a secure context (HTTPS) to local domains.  Today, a
-secure context is obtained with a PKIX certificate ({{?RFC5280}})
+storage (NAS).
+However, with the advent of HTTPS everywhere {{eveywhere}}, browsers disadvantage unencrypted
+communications (e.g., {{not-secure}}, {{sec-context}}).
+This increases importance of a secure context (HTTPS) to local domains.
+
+In addition, it is recognized that home networks are not (and perhaps have never been) the idyllic secure gardens that many think they are.
+There are persistent threats in the home due to malware on devices within the home, as well as malware that might arrive on guest devices.
+Most home networks have little protection against various kinds of (layer-2) spoofing attacks, which means that active on-path attacks (MITM) must be assumed.
+Securing the administrative and regular connections within the home network would result in significant security gains for all devices in the home.
+
+Today, a secure context is obtained with a PKIX certificate ({{?RFC5280}})
 signed by a Certification Authority (CA) that is trusted by the client.
 
 However, servers on a local network cannot easily get PKIX
-certificates signed by a Certification Authority because of their
-firewall or NAT (to prove domain ownership), lack of domain name
-delegation, and need for ongoing certificate renewal.
+certificates signed by a Certification Authority because: they are not directly reachable from the outside (due to firewall or NAPT), lack of domain name delegation, and need for ongoing certificate renewal.
 
 The problem has been well recognized since about 2017 and several
 proposals have been suggested to solve this problem, each with their
@@ -218,11 +236,18 @@ authentication system for local hosts.
 
 # Technical Requirements
 
+The goal is to work out the engineering tradeoff around {{zookotriangle}}.
+Specifically it says there are three aspects that must be traded off:
+
+* Human-meaningful
+* Secure
+* Decentralized
+
 ## Naming
 
 PKIX certificates are a centralized naming scheme derived from DNS.
-These names have (the possibility of) being human-readable names.  But
-the most significant property is uniqueness -- each name has its own
+These names have (the possibility of) having human-readable names.
+But the most significant property is uniqueness -- each name has its own
 identity and that identity can be proven.
 
 A system that does not rely on centralized naming lacks this inherient
@@ -232,10 +257,14 @@ Without a centralized naming scheme, name collisions are possible and
 likely.  For example, it is likely that many networks will have a
 printer named, simply, "printer", much like many people might share a
 common name such as "John".  Humans prefer simple, human-readable
-names, but a strong identity cannot be created with such names: if
-two networks both have a printer named "printer", they are indistinguishable
-and if one responds when the other was expected, the mismatch will
-appear identical to an attack.  This would be unacceptable.
+names, but a strong identity cannot be created with such names.
+
+Two networks both have a printer named "printer", they are indistinguishable.
+This would not be as much of a problem were personal devices not mobile.
+A person's smartphone could easily visit my networks on which there is a device named "printer", and the user might well wish to actually use those printers.
+At the time time, if those names are not secured, then a simple attack against the user is possible, leading to them printing to a malicious device.
+Worse, if there are symmetric credentials (such as passwords) involved, then the user might well disclose their password to the attacker.
+This would be unacceptable.
 
 > R-UNIQUE-NAME: The system MUST have a way to uniquely identify
   servers.
@@ -268,6 +297,8 @@ Web browsers and modern users both expect a URI.
 Using IP addresses in names is problematic if the server's IP address
 changes due to ISP renumbering or internal network DHCP server
 reconfiguration.
+
+Given common NAT44 (NAPT), many many networks will share the same IPv4 addresses.
 
 > R-ABSTRACT: The solution SHOULD abstract names from IP addresses.
 
