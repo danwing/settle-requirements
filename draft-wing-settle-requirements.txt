@@ -5,8 +5,10 @@
 Network Working Group                                            D. Wing
 Internet-Draft                                                    Citrix
 Intended status: Informational                                 E. Nygren
-Expires: 25 July 2025                                Akamai Technologies
-                                                         21 January 2025
+Expires: 4 September 2025                            Akamai Technologies
+                                                           M. Richardson
+                                                Sandelman Software Works
+                                                            3 March 2025
 
 
                 Requirements for HTTPS for Local Domains
@@ -20,8 +22,7 @@ Abstract
    secure context.  However, obtaining PKIX certificates for those
    servers is difficult for a variety of reasons.
 
-   This document explores requirements for authenticating local servers
-   without relying on PKIX certificates.
+   This document explores requirements for authenticating local servers.
 
 About This Document
 
@@ -55,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 July 2025.
+   This Internet-Draft will expire on 4 September 2025.
 
 Copyright Notice
 
@@ -111,18 +112,32 @@ Table of Contents
 
 1.  Introduction
 
-   Servers on local networks have historically used and encouraged
-   unencrypted communications -- printers, routers, network attached
-   storage (NAS).  However, browsers disadvantage unencrypted
-   communications (e.g., [not-secure], [sec-context]) which increases
-   importance of a secure context (HTTPS) to local domains.  Today, a
-   secure context is obtained with a PKIX certificate ([RFC5280]) signed
-   by a Certification Authority (CA) that is trusted by the client.
+   Servers on local networks have historically settled for unencrypted
+   communications -- printers, routers, network attached storage (NAS).
+   However, with the advent of HTTPS everywhere [everywhere], browsers
+   disadvantage unencrypted communications (e.g., [not-secure],
+   [sec-context]).  This increases importance of a secure context
+   (HTTPS) to local domains.
+
+   In addition, it is recognized that home networks are not (and perhaps
+   have never been) the idyllic secure gardens that many think they are.
+   There are persistent threats in the home due to malware on devices
+   within the home, as well as malware that might arrive on guest
+   devices.  Most home networks have little protection against various
+   kinds of (layer-2) spoofing attacks, which means that active on-path
+   attacks (MITM) must be assumed.  Securing the administrative and
+   regular connections within the home network would result in
+   significant security gains for all devices in the home.
+
+   Today, a secure context is obtained with a PKIX certificate
+   ([RFC5280]) signed by a Certification Authority (CA) that is trusted
+   by the client.
 
    However, servers on a local network cannot easily get PKIX
-   certificates signed by a Certification Authority because of their
-   firewall or NAT (to prove domain ownership), lack of domain name
-   delegation, and need for ongoing certificate renewal.
+   certificates signed by a Certification Authority because: they are
+   not directly reachable from the outside (due to firewall or NAPT),
+   lack of domain name delegation, and need for ongoing certificate
+   renewal.
 
    The problem has been well recognized since about 2017 and several
    proposals have been suggested to solve this problem, each with their
@@ -162,10 +177,20 @@ Table of Contents
 
 3.  Technical Requirements
 
+   The goal is to work out the engineering tradeoff around
+   [zookotriangle].  Specifically it says there are three aspects that
+   must be traded off:
+
+   *  Human-meaningful
+
+   *  Secure
+
+   *  Decentralized
+
 3.1.  Naming
 
    PKIX certificates are a centralized naming scheme derived from DNS.
-   These names have (the possibility of) being human-readable names.
+   These names have (the possibility of) having human-readable names.
    But the most significant property is uniqueness -- each name has its
    own identity and that identity can be proven.
 
@@ -176,11 +201,18 @@ Table of Contents
    likely.  For example, it is likely that many networks will have a
    printer named, simply, "printer", much like many people might share a
    common name such as "John".  Humans prefer simple, human-readable
-   names, but a strong identity cannot be created with such names: if
-   two networks both have a printer named "printer", they are
-   indistinguishable and if one responds when the other was expected,
-   the mismatch will appear identical to an attack.  This would be
-   unacceptable.
+   names, but a strong identity cannot be created with such names.
+
+   Two networks both have a printer named "printer", they are
+   indistinguishable.  This would not be as much of a problem were
+   personal devices not mobile.  A person's smartphone could easily
+   visit my networks on which there is a device named "printer", and the
+   user might well wish to actually use those printers.  At the time
+   time, if those names are not secured, then a simple attack against
+   the user is possible, leading to them printing to a malicious device.
+   Worse, if there are symmetric credentials (such as passwords)
+   involved, then the user might well disclose their password to the
+   attacker.  This would be unacceptable.
 
       R-UNIQUE-NAME: The system MUST have a way to uniquely identify
       servers.
@@ -211,6 +243,9 @@ Table of Contents
    Using IP addresses in names is problematic if the server's IP address
    changes due to ISP renumbering or internal network DHCP server
    reconfiguration.
+
+   Given common NAT44 (NAPT), many many networks will share the same
+   IPv4 addresses.
 
       R-ABSTRACT: The solution SHOULD abstract names from IP addresses.
 
@@ -466,6 +501,10 @@ Table of Contents
               Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
               <https://www.rfc-editor.org/rfc/rfc6763>.
 
+   [everywhere]
+              EFF, "HTTPS Everywhere", March 2025,
+              <https://www.eff.org/https-everywhere>.
+
    [iotops-suib]
               IOT Security Foundation, "SUIB: Router and IoT
               Vulnerabilities: Insecure by Design", August 2021,
@@ -567,6 +606,10 @@ Table of Contents
    [w3c-pna]  W3C, "Private Network Access", September 2024,
               <https://wicg.github.io/private-network-access/>.
 
+   [zookotriangle]
+              Wikipedia, "Zooko's triangle", March 2025,
+              <https://en.wikipedia.org/wiki/Zooko%27s_triangle>.
+
 Acknowledgments
 
    TODO acknowledge.
@@ -582,3 +625,8 @@ Authors' Addresses
    Akamai Technologies
    Email: erik+ietf@nygren.org
    URI:   http://erik.nygren.org/
+
+
+   Michael Richardson
+   Sandelman Software Works
+   Email: mcr+ietf@sandelman.ca

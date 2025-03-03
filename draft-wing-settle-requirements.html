@@ -7,6 +7,7 @@
 <title>Requirements for HTTPS for Local Domains</title>
 <meta content="Dan Wing" name="author">
 <meta content="Erik Nygren" name="author">
+<meta content="Michael Richardson" name="author">
 <meta content="
        When connecting to servers on their local network, users are
 surprised to encounter user interfaces that display errors,
@@ -14,10 +15,9 @@ show insecure connections, and block some HTTP features
 when missing a secure context.  However, obtaining PKIX
 certificates for those servers is difficult for a variety
 of reasons. 
-       This document explores requirements for authenticating local servers
-without relying on PKIX certificates. 
+       This document explores requirements for authenticating local servers. 
     " name="description">
-<meta content="xml2rfc 3.25.0" name="generator">
+<meta content="xml2rfc 3.28.0" name="generator">
 <meta content="https" name="keyword">
 <meta content="local domains" name="keyword">
 <meta content="pki" name="keyword">
@@ -28,8 +28,8 @@ without relying on PKIX certificates.
 <meta content="authentication" name="keyword">
 <meta content="draft-wing-settle-requirements-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.25.0
-    Python 3.12.8
+  xml2rfc 3.28.0
+    Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -450,7 +450,7 @@ dl {
     margin-bottom: 0;
   }
 }
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
@@ -1059,11 +1059,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Requirements for HTTPS for Local Domains</td>
-<td class="right">January 2025</td>
+<td class="right">March 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Wing &amp; Nygren</td>
-<td class="center">Expires 25 July 2025</td>
+<td class="left">Wing, et al.</td>
+<td class="center">Expires 4 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wing-settle-requirements-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-21" class="published">21 January 2025</time>
+<time datetime="2025-03-03" class="published">3 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-25">25 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-04">4 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1091,6 +1091,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div class="author">
       <div class="author-name">E. Nygren</div>
 <div class="org">Akamai Technologies</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Richardson</div>
+<div class="org">Sandelman Software Works</div>
 </div>
 </dd>
 </dl>
@@ -1104,8 +1108,7 @@ show insecure connections, and block some HTTP features
 when missing a secure context.  However, obtaining PKIX
 certificates for those servers is difficult for a variety
 of reasons.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">This document explores requirements for authenticating local servers
-without relying on PKIX certificates.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document explores requirements for authenticating local servers.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1142,7 +1145,7 @@ without relying on PKIX certificates.<a href="#section-abstract-2" class="pilcro
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1293,51 +1296,54 @@ without relying on PKIX certificates.<a href="#section-abstract-2" class="pilcro
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Servers on local networks have historically used and encouraged
+<p id="section-1-1">Servers on local networks have historically settled for
 unencrypted communications -- printers, routers, network attached
-storage (NAS).  However, browsers disadvantage unencrypted
-communications (e.g., <span>[<a href="#not-secure" class="cite xref">not-secure</a>]</span>, <span>[<a href="#sec-context" class="cite xref">sec-context</a>]</span>) which increases
-importance of a secure context (HTTPS) to local domains.  Today, a
-secure context is obtained with a PKIX certificate (<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)
-signed by a Certification Authority (CA) that is trusted by the client.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">However, servers on a local network cannot easily get PKIX
-certificates signed by a Certification Authority because of their
-firewall or NAT (to prove domain ownership), lack of domain name
-delegation, and need for ongoing certificate renewal.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">The problem has been well recognized since about 2017 and several
+storage (NAS).
+However, with the advent of HTTPS everywhere <span>[<a href="#everywhere" class="cite xref">everywhere</a>]</span>, browsers disadvantage unencrypted
+communications (e.g., <span>[<a href="#not-secure" class="cite xref">not-secure</a>]</span>, <span>[<a href="#sec-context" class="cite xref">sec-context</a>]</span>).
+This increases importance of a secure context (HTTPS) to local domains.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">In addition, it is recognized that home networks are not (and perhaps have never been) the idyllic secure gardens that many think they are.
+There are persistent threats in the home due to malware on devices within the home, as well as malware that might arrive on guest devices.
+Most home networks have little protection against various kinds of (layer-2) spoofing attacks, which means that active on-path attacks (MITM) must be assumed.
+Securing the administrative and regular connections within the home network would result in significant security gains for all devices in the home.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Today, a secure context is obtained with a PKIX certificate (<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>)
+signed by a Certification Authority (CA) that is trusted by the client.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">However, servers on a local network cannot easily get PKIX
+certificates signed by a Certification Authority because: they are not directly reachable from the outside (due to firewall or NAPT), lack of domain name delegation, and need for ongoing certificate renewal.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">The problem has been well recognized since about 2017 and several
 proposals have been suggested to solve this problem, each with their
 own drawbacks.  This document is not intended to summarize these proposals
 or their drawbacks; for that detail see the pointers to previous work
 in <a href="#related" class="auto internal xref">Section 7</a>.  At a high level, the proposals have involved
-solutions such as:<a href="#section-1-3" class="pilcrow">¶</a></p>
+solutions such as:<a href="#section-1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-4.1">
-          <p id="section-1-4.1.1">pre-shared secrets (scanned, printed, or displayed by the server)<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-6.1">
+          <p id="section-1-6.1.1">pre-shared secrets (scanned, printed, or displayed by the server)<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.2">
-          <p id="section-1-4.2.1">Public DNS pointing at local domain's IP address (e.g., <span>[<a href="#plex" class="cite xref">plex</a>]</span>)<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-6.2">
+          <p id="section-1-6.2.1">Public DNS pointing at local domain's IP address (e.g., <span>[<a href="#plex" class="cite xref">plex</a>]</span>)<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.3">
-          <p id="section-1-4.3.1">Local Certification Authority, where a CA is
+        <li class="normal" id="section-1-6.3">
+          <p id="section-1-6.3.1">Local Certification Authority, where a CA is
 added to client's certificate trust list and that CA signs
-certificates for devices within the local network<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+certificates for devices within the local network<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.4">
-          <p id="section-1-4.4.1">Trust On First Use (TOFU), where a user verifies the first
+        <li class="normal" id="section-1-6.4">
+          <p id="section-1-6.4.1">Trust On First Use (TOFU), where a user verifies the first
 connection to a server and the client remembers that verification,
-similar to common use of ssh<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
+similar to common use of ssh<a href="#section-1-6.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.5">
-          <p id="section-1-4.5.1">WebRTC and WebTransport, where a PKI-signed server provides a
+        <li class="normal" id="section-1-6.5">
+          <p id="section-1-6.5.1">WebRTC and WebTransport, where a PKI-signed server provides a
 public key fingerprint of another server that it has previously
-bootstrapped<a href="#section-1-4.5.1" class="pilcrow">¶</a></p>
+bootstrapped<a href="#section-1-6.5.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.6">
-          <p id="section-1-4.6.1">Encoding server's public key into the hostname <span>[<a href="#thomson-hld" class="cite xref">thomson-hld</a>]</span><a href="#section-1-4.6.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-6.6">
+          <p id="section-1-6.6.1">Encoding server's public key into the hostname <span>[<a href="#thomson-hld" class="cite xref">thomson-hld</a>]</span><a href="#section-1-6.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-5">This document explores IETF requirements for an alternative server
-authentication system for local hosts.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-7">This document explores IETF requirements for an alternative server
+authentication system for local hosts.<a href="#section-1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1356,14 +1362,27 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-technical-requirements">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-technical-requirements" class="section-name selfRef">Technical Requirements</a>
       </h2>
+<p id="section-3-1">The goal is to work out the engineering tradeoff around <span>[<a href="#zookotriangle" class="cite xref">zookotriangle</a>]</span>.
+Specifically it says there are three aspects that must be traded off:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-2.1">
+          <p id="section-3-2.1.1">Human-meaningful<a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.2">
+          <p id="section-3-2.2.1">Secure<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.3">
+          <p id="section-3-2.3.1">Decentralized<a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 <div id="naming">
 <section id="section-3.1">
         <h3 id="name-naming">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-naming" class="section-name selfRef">Naming</a>
         </h3>
 <p id="section-3.1-1">PKIX certificates are a centralized naming scheme derived from DNS.
-These names have (the possibility of) being human-readable names.  But
-the most significant property is uniqueness -- each name has its own
+These names have (the possibility of) having human-readable names.
+But the most significant property is uniqueness -- each name has its own
 identity and that identity can be proven.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">A system that does not rely on centralized naming lacks this inherient
 uniqueness property.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
@@ -1371,14 +1390,17 @@ uniqueness property.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 likely.  For example, it is likely that many networks will have a
 printer named, simply, "printer", much like many people might share a
 common name such as "John".  Humans prefer simple, human-readable
-names, but a strong identity cannot be created with such names: if
-two networks both have a printer named "printer", they are indistinguishable
-and if one responds when the other was expected, the mismatch will
-appear identical to an attack.  This would be unacceptable.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+names, but a strong identity cannot be created with such names.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">Two networks both have a printer named "printer", they are indistinguishable.
+This would not be as much of a problem were personal devices not mobile.
+A person's smartphone could easily visit my networks on which there is a device named "printer", and the user might well wish to actually use those printers.
+At the time time, if those names are not secured, then a simple attack against the user is possible, leading to them printing to a malicious device.
+Worse, if there are symmetric credentials (such as passwords) involved, then the user might well disclose their password to the attacker.
+This would be unacceptable.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.1-4.1">
-            <p id="section-3.1-4.1.1">R-UNIQUE-NAME: The system <span class="bcp14">MUST</span> have a way to uniquely identify
-  servers.<a href="#section-3.1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.1-5.1">
+            <p id="section-3.1-5.1.1">R-UNIQUE-NAME: The system <span class="bcp14">MUST</span> have a way to uniquely identify
+  servers.<a href="#section-3.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1423,19 +1445,20 @@ identity.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-1">Using IP addresses in names is problematic if the server's IP address
 changes due to ISP renumbering or internal network DHCP server
 reconfiguration.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Given common NAT44 (NAPT), many many networks will share the same IPv4 addresses.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.3-2.1">
-            <p id="section-3.3-2.1.1">R-ABSTRACT: The solution <span class="bcp14">SHOULD</span> abstract names from IP addresses.<a href="#section-3.3-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.3-3.1">
+            <p id="section-3.3-3.1.1">R-ABSTRACT: The solution <span class="bcp14">SHOULD</span> abstract names from IP addresses.<a href="#section-3.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.3-3">Any given name should be resolvable to a mixture of IPv4, IPv6
+<p id="section-3.3-4">Any given name should be resolvable to a mixture of IPv4, IPv6
 Link-Local (on an Interface), IPv6 ULA, and IPv6 Globally-Routable
 addresses. Operating a local DNS is beyond the scope of many
 administrators, so being able to advertise the server using
-<span>[<a href="#DNS-SD" class="cite xref">DNS-SD</a>]</span> is necessary.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<span>[<a href="#DNS-SD" class="cite xref">DNS-SD</a>]</span> is necessary.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.3-4.1">
-            <p id="section-3.3-4.1.1">R-DNS-SD: The name <span class="bcp14">MUST</span> be advertisable using <span>[<a href="#DNS-SD" class="cite xref">DNS-SD</a>]</span><a href="#section-3.3-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal ulEmpty" id="section-3.3-5.1">
+            <p id="section-3.3-5.1.1">R-DNS-SD: The name <span class="bcp14">MUST</span> be advertisable using <span>[<a href="#DNS-SD" class="cite xref">DNS-SD</a>]</span><a href="#section-3.3-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1894,6 +1917,10 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
         <dd>
 <span class="refAuthor">Cheshire, S.</span> and <span class="refAuthor">M. Krochmal</span>, <span class="refTitle">"DNS-Based Service Discovery"</span>, <span class="seriesInfo">RFC 6763</span>, <span class="seriesInfo">DOI 10.17487/RFC6763</span>, <time datetime="2013-02" class="refDate">February 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6763">https://www.rfc-editor.org/rfc/rfc6763</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="everywhere">[everywhere]</dt>
+        <dd>
+<span class="refAuthor">EFF</span>, <span class="refTitle">"HTTPS Everywhere"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://www.eff.org/https-everywhere">https://www.eff.org/https-everywhere</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="iotops-suib">[iotops-suib]</dt>
         <dd>
 <span class="refAuthor">IOT Security Foundation</span>, <span class="refTitle">"SUIB: Router and IoT Vulnerabilities: Insecure by Design"</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://iotsecurityfoundation.org/wp-content/uploads/2021/08/ManySecured-SUIB-White-Paper.pdf">https://iotsecurityfoundation.org/wp-content/uploads/2021/08/ManySecured-SUIB-White-Paper.pdf</a>&gt;</span>. </dd>
@@ -1980,8 +2007,12 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
 <span class="refAuthor">W3C</span>, <span class="refTitle">"HTTPS in Local Network Community Group"</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://github.com/httpslocal">https://github.com/httpslocal</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="w3c-pna">[w3c-pna]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">W3C</span>, <span class="refTitle">"Private Network Access"</span>, <time datetime="2024-09" class="refDate">September 2024</time>, <span>&lt;<a href="https://wicg.github.io/private-network-access/">https://wicg.github.io/private-network-access/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="zookotriangle">[zookotriangle]</dt>
+      <dd>
+<span class="refAuthor">Wikipedia</span>, <span class="refTitle">"Zooko's triangle"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://en.wikipedia.org/wiki/Zooko%27s_triangle">https://en.wikipedia.org/wiki/Zooko%27s_triangle</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2019,6 +2050,14 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
 <div class="url">
 <span>URI:</span>
 <a href="http://erik.nygren.org/" class="url">http://erik.nygren.org/</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Michael Richardson</span></div>
+<div dir="auto" class="left"><span class="org">Sandelman Software Works</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:mcr+ietf@sandelman.ca" class="email">mcr+ietf@sandelman.ca</a>
 </div>
 </address>
 </section>
