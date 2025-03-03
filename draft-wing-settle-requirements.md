@@ -187,7 +187,7 @@ This document explores requirements for authenticating local servers.
 Servers on local networks have historically settled for
 unencrypted communications -- printers, routers, network attached
 storage (NAS).
-However, with the advent of HTTPS everywhere {{eveywhere}}, browsers disadvantage unencrypted
+However, with the advent of HTTPS everywhere {{everywhere}}, browsers disadvantage unencrypted
 communications (e.g., {{not-secure}}, {{sec-context}}).
 This increases importance of a secure context (HTTPS) to local domains.
 
