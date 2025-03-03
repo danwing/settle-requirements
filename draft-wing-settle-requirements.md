@@ -40,8 +40,11 @@ author:
     organization: Akamai Technologies
     email: erik+ietf@nygren.org
     uri: http://erik.nygren.org/
-
-
+ -
+    ins: M. Richardson
+    name: Michael Richardson
+    org: Sandelman Software Works
+    email: mcr+ietf@sandelman.ca
 
 normative:
 
