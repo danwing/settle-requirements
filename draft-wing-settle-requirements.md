@@ -56,6 +56,21 @@ informative:
     date: September 2017
     target: https://docs.google.com/document/u/0/d/170rFC91jqvpFrKIqG4K8Vox8AL4LeQXzfikBQXYPmzU/edit
 
+
+  Safari-ext:
+    title: "Discovery - DNS-SD Browser"
+    author:
+      name: Lily Ballard
+    date: 2022
+    target: https://apps.apple.com/ca/app/discovery-dns-sd-browser/id1381004916?mt=12
+
+  Firefox-ext:
+    title: "mDNS Discover"
+    author:
+      name: Dale Smith
+    date: December 2020
+    target: https://addons.mozilla.org/en-US/firefox/addon/mdns-discover/
+
   tpac:
     title: "HTTPS for Local Networks"
     author:
@@ -202,7 +217,7 @@ signed by a Certification Authority (CA) that is trusted by the client.
 However, servers on a local network cannot easily get PKIX
 certificates signed by a Certification Authority because: they are not directly reachable from the outside (due to firewall or NAPT), lack of domain name delegation, and need for ongoing certificate renewal.
 
-The problem has been well recognized since about 2017 and several
+The problem has been well recognized since about 2010 and several
 proposals have been suggested to solve this problem, each with their
 own drawbacks.  This document is not intended to summarize these proposals
 or their drawbacks; for that detail see the pointers to previous work
@@ -253,18 +268,17 @@ identity and that identity can be proven.
 A system that does not rely on centralized naming lacks this inherient
 uniqueness property.
 
-Without a centralized naming scheme, name collisions are possible and
-likely.  For example, it is likely that many networks will have a
-printer named, simply, "printer", much like many people might share a
-common name such as "John".  Humans prefer simple, human-readable
+Name collisions can be engineered by attackers for nefarious purposes.
+For example, if a victim is configured to use the (likely) unique
+name "printer-12ab34cd56ef.local" (containing the printer's full or
+partial MAC address), an attacker can respond to connections to that
+name, potentially stealing the user's authentication credentials
+to that printer or seeing the content the user sent to that printer.
+Similar attacks are possible with file shares.  This problem is
+exacerbated if non-unique names are used (e.g., simply "printer.local"
+or "router.local"), as it reduces the attacker's effort.
+Humans prefer simple, human-readable
 names, but a strong identity cannot be created with such names.
-
-Two networks both have a printer named "printer", they are indistinguishable.
-This would not be as much of a problem were personal devices not mobile.
-A person's smartphone could easily visit my networks on which there is a device named "printer", and the user might well wish to actually use those printers.
-At the time time, if those names are not secured, then a simple attack against the user is possible, leading to them printing to a malicious device.
-Worse, if there are symmetric credentials (such as passwords) involved, then the user might well disclose their password to the attacker.
-This would be unacceptable.
 
 > R-UNIQUE-NAME: The system MUST have a way to uniquely identify
   servers.
@@ -315,9 +329,10 @@ administrators, so being able to advertise the server using
 ## Avoid Central Authority
 
 A solution needs to be self-contained and not use the central
-authority of PKIX.
+authority of PKIX.  Being self-contained also removes reliance
+on a device vendor (to operate a centralized service).
 
-> R-AVOID-CENTRAL: A solution SHOULD NOT (MUST NOT?) rely on central
+> R-AVOID-CENTRAL: A solution MUST NOT rely on central
   trust hierarchy.
 
 Vendors go out of business or lose interest in continuing to service
@@ -334,9 +349,9 @@ old products. The products may still be operational.
 > R-HTTPS: A solution MUST support HTTPS.
 
 > R-MULT-APP: A solution SHOULD support other application-level
-  protocols such as IPPS {{?RFC7472}}, DoT {{?RFC7858}}, SMB over
+  protocols such as DoT {{?RFC7858}}, SMB over
   QUIC {{smb-quic}}, IMAP {{?RFC8314}}, and SIP {{?RFC3261}}, as
-  those protocols are routinely served with a local domain.
+  those protocols are routinely served within a local domain.
 
 
 ## Cryptographic Agility
@@ -349,10 +364,6 @@ old products. The products may still be operational.
 > R-TLS-SNI: A solution SHOULD support TLS SNI so a server knows which
 key pair/cert is expected.
 
-## Localhost
-
-> R-LOCALHOST: A solution SHOULD support "localhost" (e.g.,
-for sending a user to connect to a local service)
 
 
 ## W3C Private Network Access
@@ -362,9 +373,15 @@ for sending a user to connect to a local service)
 provide more robust solutions to vulnerabilities that it tries to
 address
 
-## Constrain to Local Resources
+## Operate with Local Resources
 
-> R-LOCAL: A solution SHOULD be constrained to .local and .internal.
+The TLDs ".local" and ".internal" are defined local domains and
+enterprise networks usually have a site domain
+("internal.example.com").  A solution that scales from a home
+network to an enterprise network is desirable.
+
+> R-LOCAL: A solution MUST operate with  .local and .internal, and SHOULD
+operate with an administratively-defined zone (e.g., internal.example.com).
 
 > Discuss: MAY constrain to the DHCP domain-search value??  Should we
 also allow any arbitrary name if the IP address is local (RFC1918
@@ -372,13 +389,29 @@ address), too?
 
 ## Operate Standalone
 
-After configuration, the system needs to operate without a
-connection to the Internet.  This is necessary because Internet
-connectivity is sometimes flaky or unavailable (e.g., cabin in the
-woods).
+The system needs to operate without a connection to the Internet.
+This is necessary because Internet connectivity is sometimes flaky or
+unavailable (e.g., cabin in the woods, lengthy ISP outage).
 
-> R-STANDALONE: MUST operate securely while Internet connectivity is
-  unavailable.
+This does not prohibit operating a cloud service or a virtualized
+CPE to initially deploy a system or to add/remove a device from
+an existing system.  Rather, this requirement constrains day-to-day
+system operation to not require Internet communication.
+
+> R-STANDALONE: MUST NOT require Internet connectivity to operate
+securely.
+
+> Discuss: perhaps want to refine wording of this requirement, or
+split into separate requirements.
+
+
+## Web Origin {#web-origin}
+
+The Web Origin is comprised of the scheme (e.g., "https:"), hostname, and port.  Today,
+when a key rotation occurs the Web Origin remains the same.  In this way, things like
+stored web data (forms, passwords, cookies) can be used even after a key rotation.
+
+> R-WEB-ORIGIN:  The Web Origin MUST be retained during key rotation.
 
 
 ## Miscellaneous
@@ -436,7 +469,8 @@ to a friendly name.
 names, or give a pull-down of them similar to how the "add printer"
 dialog does for printers?  This would help ease the use of long FQDN
 so it's almost as easy as router.local.  Especially if it could show a
-nickname that is configured by the printer.
+nickname that is configured by the printer.  Browser extensions
+exist for DNS-SD and mDNS ({{Safari-ext}}, {{Firefox-ext}}).
 
 ## Human-friendly Name
 
@@ -448,19 +482,12 @@ representation of its presence)
 
 # Big Open Questions
 
-## Key Rotation
 
-1. Is it acceptable for the Web Origin to change as part of key
-rotations?  A: no, this does not happen today and changing the web
-origin would violate the principle of least surprise.
 
 ## Trust on First Use (TOFU)
 
-Is TOFU acceptable?
-
-> Note: TOFU is arguably what we have today with self-signed certificates
-     which can be trusted (after the user accepts the warning message and
-     adds the certificate to their client's trust store).
+As evidenced by web browser behavior over the years with self-signed certificates
+and their (increased) warnings, TOFU will not be acceptable.
 
 
 ## User Experience
@@ -509,9 +536,23 @@ both initial and ongoing configuration tasks of various servers
 
 # Related {#related}
 
-Martin Thomson wrote a document on HTTPS for Local Domains which covers requirements,
-discusses several solutions and their tradeoffs, and suggests a solution with hostnames
-encoding the server's public key {{thomson-hld}} in November 2017.
+Martin Thomson wrote {{thomson-hld}} on HTTPS for Local Domains which
+covers requirements, discusses several solutions and their tradeoffs,
+and suggests a solution where the client extends the Web Origin to
+include the server's public key. It does not allow the server to
+rotate its public key (as that would change the extended Web Origin).
+
+Dan Wing has proposed a Referee system which uses a new HTTPS-based
+server to authorize servers public keys (akin to an allowlist or to
+OCSP stapling) and encoding the server's public key into its hostname.
+{{?I-D.wing-settle-referee}}.  However, like like {{thomson-hld}}, it
+does not allow a server to rotate its key as that would change the
+web origin (see {{web-origin}}).
+
+Michael Sweet has proposed a locally-deployed Certification Authority
+{{?I-D.sweet-iot-acme}} which meets most of this document's
+requirements.
+
 
 W3C worked on this problem from 2017 through 2021 {{w3c-httpslocal}}. More recently,
 W3C had a workshop on the problem in September 2024 {{tpac}}.
@@ -554,4 +595,6 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+Thanks to Michael Sweet for his review and feedback.
+
+
