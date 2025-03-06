@@ -393,13 +393,9 @@ The system needs to operate without a connection to the Internet.
 This is necessary because Internet connectivity is sometimes flaky or
 unavailable (e.g., cabin in the woods, lengthy ISP outage).
 
-This does not prohibit operating a cloud service or a virtualized
-CPE to initially deploy a system or to add/remove a device from
-an existing system.  Rather, this requirement constrains day-to-day
-system operation to not require Internet communication.
-
 > R-STANDALONE: MUST NOT require Internet connectivity to operate
-securely.
+securely, for its initial configuration, or to add or remove a device
+from list of authorized devices in the system.
 
 > Discuss: perhaps want to refine wording of this requirement, or
 split into separate requirements.
