@@ -532,23 +532,22 @@ both initial and ongoing configuration tasks of various servers
 
 # Related {#related}
 
-Martin Thomson wrote {{thomson-hld}} on HTTPS for Local Domains which
+Martin Thomson wrote HTTPS for Local Domains {{thomson-hld}} which
 covers requirements, discusses several solutions and their tradeoffs,
 and suggests a solution where the client extends the Web Origin to
 include the server's public key. It does not allow the server to
-rotate its public key (as that would change the extended Web Origin).
+rotate its public key as that would change the extended Web Origin (see
+{{web-origin}}).
 
-Dan Wing has proposed a Referee system which uses a new HTTPS-based
-server to authorize servers public keys (akin to an allowlist or to
-OCSP stapling) and encoding the server's public key into its hostname.
-{{?I-D.wing-settle-referee}}.  However, like like {{thomson-hld}}, it
-does not allow a server to rotate its key as that would change the
-web origin (see {{web-origin}}).
+Dan Wing has proposed a Referee system {{?I-D.wing-settle-referee}}
+which uses a new HTTPS-based server to authorize servers public keys
+(akin to an allowlist or to OCSP stapling) and encoding the server's
+public key into its hostname.  Like {{thomson-hld}}, it does not allow
+a server to rotate its key (see {{web-origin}}).
 
 Michael Sweet has proposed a locally-deployed Certification Authority
 {{?I-D.sweet-iot-acme}} which meets most of this document's
 requirements.
-
 
 W3C worked on this problem from 2017 through 2021 {{w3c-httpslocal}}. More recently,
 W3C had a workshop on the problem in September 2024 {{tpac}}.
