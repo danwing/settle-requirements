@@ -5,10 +5,10 @@
 Network Working Group                                            D. Wing
 Internet-Draft                                                    Citrix
 Intended status: Informational                                 E. Nygren
-Expires: 4 September 2025                            Akamai Technologies
+Expires: 8 September 2025                            Akamai Technologies
                                                            M. Richardson
                                                 Sandelman Software Works
-                                                            3 March 2025
+                                                            7 March 2025
 
 
                 Requirements for HTTPS for Local Domains
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 8 September 2025.
 
 Copyright Notice
 
@@ -84,10 +84,10 @@ Table of Contents
      3.5.  Multiple Application Protocols
      3.6.  Cryptographic Agility
      3.7.  TLS Server Name Indication
-     3.8.  Localhost
-     3.9.  W3C Private Network Access
-     3.10. Constrain to Local Resources
-     3.11. Operate Standalone
+     3.8.  W3C Private Network Access
+     3.9.  Operate with Local Resources
+     3.10. Operate Standalone
+     3.11. Web Origin
      3.12. Miscellaneous
    4.  Human Factors Requirements
      4.1.  Discoverable
@@ -95,11 +95,10 @@ Table of Contents
      4.3.  Bookmarkable
      4.4.  Human-friendly Name
    5.  Big Open Questions
-     5.1.  Key Rotation
-     5.2.  Trust on First Use (TOFU)
-     5.3.  User Experience
-     5.4.  Trust Relationship
-     5.5.  Interaction with Matter/Thread
+     5.1.  Trust on First Use (TOFU)
+     5.2.  User Experience
+     5.3.  Trust Relationship
+     5.4.  Interaction with Matter/Thread
    6.  Use Cases
    7.  Related
    8.  Security Considerations
@@ -139,7 +138,7 @@ Table of Contents
    lack of domain name delegation, and need for ongoing certificate
    renewal.
 
-   The problem has been well recognized since about 2017 and several
+   The problem has been well recognized since about 2010 and several
    proposals have been suggested to solve this problem, each with their
    own drawbacks.  This document is not intended to summarize these
    proposals or their drawbacks; for that detail see the pointers to
@@ -197,22 +196,17 @@ Table of Contents
    A system that does not rely on centralized naming lacks this
    inherient uniqueness property.
 
-   Without a centralized naming scheme, name collisions are possible and
-   likely.  For example, it is likely that many networks will have a
-   printer named, simply, "printer", much like many people might share a
-   common name such as "John".  Humans prefer simple, human-readable
-   names, but a strong identity cannot be created with such names.
-
-   Two networks both have a printer named "printer", they are
-   indistinguishable.  This would not be as much of a problem were
-   personal devices not mobile.  A person's smartphone could easily
-   visit my networks on which there is a device named "printer", and the
-   user might well wish to actually use those printers.  At the time
-   time, if those names are not secured, then a simple attack against
-   the user is possible, leading to them printing to a malicious device.
-   Worse, if there are symmetric credentials (such as passwords)
-   involved, then the user might well disclose their password to the
-   attacker.  This would be unacceptable.
+   Name collisions can be engineered by attackers for nefarious
+   purposes.  For example, if a victim is configured to use the (likely)
+   unique name "printer-12ab34cd56ef.local" (containing the printer's
+   full or partial MAC address), an attacker can respond to connections
+   to that name, potentially stealing the user's authentication
+   credentials to that printer or seeing the content the user sent to
+   that printer.  Similar attacks are possible with file shares.  This
+   problem is exacerbated if non-unique names are used (e.g., simply
+   "printer.local" or "router.local"), as it reduces the attacker's
+   effort.  Humans prefer simple, human-readable names, but a strong
+   identity cannot be created with such names.
 
       R-UNIQUE-NAME: The system MUST have a way to uniquely identify
       servers.
@@ -260,10 +254,11 @@ Table of Contents
 3.4.  Avoid Central Authority
 
    A solution needs to be self-contained and not use the central
-   authority of PKIX.
+   authority of PKIX.  Being self-contained also removes reliance on a
+   device vendor (to operate a centralized service).
 
-      R-AVOID-CENTRAL: A solution SHOULD NOT (MUST NOT?) rely on central
-      trust hierarchy.
+      R-AVOID-CENTRAL: A solution MUST NOT rely on central trust
+      hierarchy.
 
    Vendors go out of business or lose interest in continuing to service
    old products.  The products may still be operational.
@@ -278,9 +273,9 @@ Table of Contents
       R-HTTPS: A solution MUST support HTTPS.
 
       R-MULT-APP: A solution SHOULD support other application-level
-      protocols such as IPPS [RFC7472], DoT [RFC7858], SMB over QUIC
-      [smb-quic], IMAP [RFC8314], and SIP [RFC3261], as those protocols
-      are routinely served with a local domain.
+      protocols such as DoT [RFC7858], SMB over QUIC [smb-quic], IMAP
+      [RFC8314], and SIP [RFC3261], as those protocols are routinely
+      served within a local domain.
 
 3.6.  Cryptographic Agility
 
@@ -292,34 +287,49 @@ Table of Contents
       R-TLS-SNI: A solution SHOULD support TLS SNI so a server knows
       which key pair/cert is expected.
 
-3.8.  Localhost
-
-      R-LOCALHOST: A solution SHOULD support "localhost" (e.g., for
-      sending a user to connect to a local service)
-
-3.9.  W3C Private Network Access
+3.8.  W3C Private Network Access
 
       R-PNA: A solution SHOULD integrate well with an evolution of
       [w3c-pna] and both allow for an improved model there but should
       also provide more robust solutions to vulnerabilities that it
       tries to address
 
-3.10.  Constrain to Local Resources
+3.9.  Operate with Local Resources
 
-      R-LOCAL: A solution SHOULD be constrained to .local and .internal.
+   The TLDs ".local" and ".internal" are defined local domains and
+   enterprise networks usually have a site domain
+   ("internal.example.com").  A solution that scales from a home network
+   to an enterprise network is desirable.
+
+      R-LOCAL: A solution MUST operate with .local and .internal, and
+      SHOULD operate with an administratively-defined zone (e.g.,
+      internal.example.com).
 
       Discuss: MAY constrain to the DHCP domain-search value??  Should
       we also allow any arbitrary name if the IP address is local
       (RFC1918 address), too?
 
-3.11.  Operate Standalone
+3.10.  Operate Standalone
 
-   After configuration, the system needs to operate without a connection
-   to the Internet.  This is necessary because Internet connectivity is
-   sometimes flaky or unavailable (e.g., cabin in the woods).
+   The system needs to operate without a connection to the Internet.
+   This is necessary because Internet connectivity is sometimes flaky or
+   unavailable (e.g., cabin in the woods, lengthy ISP outage).
 
-      R-STANDALONE: MUST operate securely while Internet connectivity is
-      unavailable.
+      R-STANDALONE: MUST NOT require Internet connectivity to operate
+      securely, for its initial configuration, or to add or remove a
+      device from list of authorized devices in the system.
+
+      Discuss: perhaps want to refine wording of this requirement, or
+      split into separate requirements.
+
+3.11.  Web Origin
+
+   The Web Origin is comprised of the scheme (e.g., "https:"), hostname,
+   and port.  Today, when a key rotation occurs the Web Origin remains
+   the same.  In this way, things like stored web data (forms,
+   passwords, cookies) can be used even after a key rotation.
+
+      R-WEB-ORIGIN: The Web Origin MUST be retained during key rotation.
 
 3.12.  Miscellaneous
 
@@ -372,6 +382,8 @@ Table of Contents
       printer" dialog does for printers?  This would help ease the use
       of long FQDN so it's almost as easy as router.local.  Especially
       if it could show a nickname that is configured by the printer.
+      Browser extensions exist for DNS-SD and mDNS ([Safari-ext],
+      [Firefox-ext]).
 
 4.4.  Human-friendly Name
 
@@ -382,27 +394,18 @@ Table of Contents
 
 5.  Big Open Questions
 
-5.1.  Key Rotation
+5.1.  Trust on First Use (TOFU)
 
-   1.  Is it acceptable for the Web Origin to change as part of key
-       rotations?  A: no, this does not happen today and changing the
-       web origin would violate the principle of least surprise.
+   As evidenced by web browser behavior over the years with self-signed
+   certificates and their (increased) warnings, TOFU will not be
+   acceptable.
 
-5.2.  Trust on First Use (TOFU)
-
-   Is TOFU acceptable?
-
-      Note: TOFU is arguably what we have today with self-signed
-      certificates which can be trusted (after the user accepts the
-      warning message and adds the certificate to their client's trust
-      store).
-
-5.3.  User Experience
+5.2.  User Experience
 
    For a solution, what is the User Experience for any trust
    relationship / web-of-trust?
 
-5.4.  Trust Relationship
+5.3.  Trust Relationship
 
    For a solution, what is the nature of the trust relationship?
 
@@ -412,7 +415,7 @@ Table of Contents
 
    *  Client establishes its own trust to the server
 
-5.5.  Interaction with Matter/Thread
+5.4.  Interaction with Matter/Thread
 
    How does a solution tie into systems like Matter/Thread that have
    their own trust establishment frameworks?
@@ -442,10 +445,22 @@ Table of Contents
 
 7.  Related
 
-   Martin Thomson wrote a document on HTTPS for Local Domains which
+   Martin Thomson wrote HTTPS for Local Domains [thomson-hld] which
    covers requirements, discusses several solutions and their tradeoffs,
-   and suggests a solution with hostnames encoding the server's public
-   key [thomson-hld] in November 2017.
+   and suggests a solution where the client extends the Web Origin to
+   include the server's public key.  It does not allow the server to
+   rotate its public key as that would change the extended Web Origin
+   (see Section 3.11).
+
+   Dan Wing has proposed a Referee system [I-D.wing-settle-referee]
+   which uses a new HTTPS-based server to authorize servers public keys
+   (akin to an allowlist or to OCSP stapling) and encoding the server's
+   public key into its hostname.  Like [thomson-hld], it does not allow
+   a server to rotate its key (see Section 3.11).
+
+   Michael Sweet has proposed a locally-deployed Certification Authority
+   [I-D.sweet-iot-acme] which meets most of this document's
+   requirements.
 
    W3C worked on this problem from 2017 through 2021 [w3c-httpslocal].
    More recently, W3C had a workshop on the problem in September 2024
@@ -504,6 +519,24 @@ Table of Contents
    [everywhere]
               EFF, "HTTPS Everywhere", March 2025,
               <https://www.eff.org/https-everywhere>.
+
+   [Firefox-ext]
+              Smith, D., "mDNS Discover", December 2020,
+              <https://addons.mozilla.org/en-US/firefox/addon/mdns-
+              discover/>.
+
+   [I-D.sweet-iot-acme]
+              Sweet, M., "ACME-Based Provisioning of IoT Devices", Work
+              in Progress, Internet-Draft, draft-sweet-iot-acme-07, 7
+              February 2025, <https://datatracker.ietf.org/doc/html/
+              draft-sweet-iot-acme-07>.
+
+   [I-D.wing-settle-referee]
+              Wing, D., "A Referee to Authenticate Servers in Local
+              Domains", Work in Progress, Internet-Draft, draft-wing-
+              settle-referee-00, 7 January 2025,
+              <https://datatracker.ietf.org/doc/html/draft-wing-settle-
+              referee-00>.
 
    [iotops-suib]
               IOT Security Foundation, "SUIB: Router and IoT
@@ -576,6 +609,11 @@ Table of Contents
               Architecture", RFC 8952, DOI 10.17487/RFC8952, November
               2020, <https://www.rfc-editor.org/rfc/rfc8952>.
 
+   [Safari-ext]
+              Ballard, L., "Discovery - DNS-SD Browser", 2022,
+              <https://apps.apple.com/ca/app/discovery-dns-sd-browser/
+              id1381004916?mt=12>.
+
    [sec-context]
               W3C, "Secure Contexts", 2023,
               <https://w3c.github.io/webappsec-secure-contexts/>.
@@ -612,7 +650,7 @@ Table of Contents
 
 Acknowledgments
 
-   TODO acknowledge.
+   Thanks to Michael Sweet for his review and feedback.
 
 Authors' Addresses
 
