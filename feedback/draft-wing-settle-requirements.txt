@@ -5,10 +5,10 @@
 Network Working Group                                            D. Wing
 Internet-Draft                                                    Citrix
 Intended status: Informational                                 E. Nygren
-Expires: 7 September 2025                            Akamai Technologies
+Expires: 8 September 2025                            Akamai Technologies
                                                            M. Richardson
                                                 Sandelman Software Works
-                                                            6 March 2025
+                                                            7 March 2025
 
 
                 Requirements for HTTPS for Local Domains
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 September 2025.
+   This Internet-Draft will expire on 8 September 2025.
 
 Copyright Notice
 
@@ -445,18 +445,18 @@ Table of Contents
 
 7.  Related
 
-   Martin Thomson wrote [thomson-hld] on HTTPS for Local Domains which
+   Martin Thomson wrote HTTPS for Local Domains [thomson-hld] which
    covers requirements, discusses several solutions and their tradeoffs,
    and suggests a solution where the client extends the Web Origin to
    include the server's public key.  It does not allow the server to
-   rotate its public key (as that would change the extended Web Origin).
+   rotate its public key as that would change the extended Web Origin
+   (see Section 3.11).
 
-   Dan Wing has proposed a Referee system which uses a new HTTPS-based
-   server to authorize servers public keys (akin to an allowlist or to
-   OCSP stapling) and encoding the server's public key into its
-   hostname.  [I-D.wing-settle-referee].  However, like like
-   [thomson-hld], it does not allow a server to rotate its key as that
-   would change the web origin (see Section 3.11).
+   Dan Wing has proposed a Referee system [I-D.wing-settle-referee]
+   which uses a new HTTPS-based server to authorize servers public keys
+   (akin to an allowlist or to OCSP stapling) and encoding the server's
+   public key into its hostname.  Like [thomson-hld], it does not allow
+   a server to rotate its key (see Section 3.11).
 
    Michael Sweet has proposed a locally-deployed Certification Authority
    [I-D.sweet-iot-acme] which meets most of this document's
