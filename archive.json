@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-06T00:39:30.101634+00:00",
+  "timestamp": "2025-03-09T00:35:02.493401+00:00",
   "repo": "danwing/settle-requirements",
   "labels": [
     {
@@ -55,16 +55,24 @@
       "id": "I_kwDONNWq_86g8806",
       "title": "Zooko's Triangle",
       "url": "https://github.com/danwing/settle-requirements/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "martinthomson",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The list of requirements isn't particularly helpful to me without first addressing the high level stuff.\r\n\r\nhttps://web.archive.org/web/20011020191610/http://zooko.com/distnames.html is probably worth spending some time on.  Talking about why \"my printer\" is not a useful reference identifier, but how it is also the only useful identifier we have.  That sort of thing.",
       "createdAt": "2024-11-28T00:49:15Z",
-      "updatedAt": "2024-11-28T00:49:15Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-03-07T18:33:16Z",
+      "closedAt": "2025-03-07T18:33:15Z",
+      "comments": [
+        {
+          "author": "danwing",
+          "authorAssociation": "OWNER",
+          "body": "A reference to Zooko's triangle was added with commit https://github.com/danwing/settle-requirements/commit/a83aa2b500f8dc66895f6de8044015d0d6dfe695, which was published in -00.\n",
+          "createdAt": "2025-03-07T18:33:15Z",
+          "updatedAt": "2025-03-07T18:33:15Z"
+        }
+      ]
     },
     {
       "number": 5,
@@ -250,6 +258,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDONNWq_86NrlyU",
+      "title": "Michael Sweet's feedback",
+      "url": "https://github.com/danwing/settle-requirements/pull/7",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-06T18:56:33Z",
+      "updatedAt": "2025-03-07T18:30:49Z",
+      "baseRepository": "danwing/settle-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "354d9fb29835958a12073bb90ff4e4646b071e14",
+      "headRepository": "danwing/settle-requirements",
+      "headRefName": "feedback",
+      "headRefOid": "9eee749a8299dbfa3040d66173038c211b9580a0",
+      "closedAt": "2025-03-07T18:30:49Z",
+      "mergedAt": "2025-03-07T18:30:49Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "c09bec50c31d3412ea50ad4497876f9677b82d66"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
