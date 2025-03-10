@@ -546,8 +546,7 @@ public key into its hostname.  Like {{thomson-hld}}, it does not allow
 a server to rotate its key (see {{web-origin}}).
 
 Michael Sweet has proposed a locally-deployed Certification Authority
-{{?I-D.sweet-iot-acme}} which meets most of this document's
-requirements.
+{{?I-D.sweet-iot-acme}} that can be incrementally deployed.
 
 W3C worked on this problem from 2017 through 2021 {{w3c-httpslocal}}. More recently,
 W3C had a workshop on the problem in September 2024 {{tpac}}.
