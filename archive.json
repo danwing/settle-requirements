@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-09T00:35:02.493401+00:00",
+  "timestamp": "2025-03-11T00:39:47.861171+00:00",
   "repo": "danwing/settle-requirements",
   "labels": [
     {
@@ -283,6 +283,34 @@
       "mergedBy": "danwing",
       "mergeCommit": {
         "oid": "c09bec50c31d3412ea50ad4497876f9677b82d66"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDONNWq_86OCL5G",
+      "title": "adjust wording of Michael Sweet's IOT documnet summary",
+      "url": "https://github.com/danwing/settle-requirements/pull/8",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-10T17:54:06Z",
+      "updatedAt": "2025-03-10T17:54:18Z",
+      "baseRepository": "danwing/settle-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "c09bec50c31d3412ea50ad4497876f9677b82d66",
+      "headRepository": "danwing/settle-requirements",
+      "headRefName": "feedback",
+      "headRefOid": "179e0ec3afa4fde083b82a6222996d53b876529c",
+      "closedAt": "2025-03-10T17:54:17Z",
+      "mergedAt": "2025-03-10T17:54:17Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "776fa1762ed669703319cf187ebf5e2058e037b2"
       },
       "comments": [],
       "reviews": []
