@@ -346,7 +346,13 @@ old products. The products may still be operational.
 
 ## Multiple Application Protocols
 
+A solution has to support HTTPS because it is frequently used for
+device management.
+
 > R-HTTPS: A solution MUST support HTTPS.
+
+Other encrypted protocols are also frequently used on local networks
+for DNS, file sharing, mail, and telephony.
 
 > R-MULT-APP: A solution SHOULD support other application-level
   protocols such as DoT {{?RFC7858}}, SMB over
@@ -356,17 +362,25 @@ old products. The products may still be operational.
 
 ## Cryptographic Agility
 
-> R-AGILITY: A solution SHOULD support crypto agility (such as
-  supporting more than one active key type).
+A solution has to support moving to new cryptographic functions.
+
+> R-AGILITY: A solution SHOULD support cryptographic agility (such as
+  supporting more than one active key type and different hashes).
 
 ## TLS Server Name Indication
 
+TLS servers frequently use the TLS SNI {{?RFC6066}} extension to
+support multiple identities on a single server.
+
 > R-TLS-SNI: A solution SHOULD support TLS SNI so a server knows which
-key pair/cert is expected.
+  key pair/cert is expected.
 
 
 
 ## W3C Private Network Access
+
+To prevent various attacks, W3C has constrained how browsers operate
+on private networks
 
 > R-PNA: A solution SHOULD integrate well with an evolution of
 {{w3c-pna}} and both allow for an improved model there but should also
@@ -445,11 +459,17 @@ local environment
 
 ## Discoverable
 
+Most local networks, especially home networks, do not operate their
+own DNS server.  Many clients already support listening for DNS-SD
+broadcasts.
+
 > R-DISCOVER: A solution SHOULD have a way to do discovery of
 endpoints and their identities (for example, via {{?DNS-SD=RFC6763}}).
 
 
 ## Easy to Use
+
+Successful solutions are usually also easy to deploy.
 
 > R-EASY: A solution SHOULD have human factors and adversarial testing
 on proposed solutions to make sure that this solution provides a
@@ -457,6 +477,10 @@ reasonable experience to average and novice end-users and does not
 introduce new security exploitation vectors
 
 ## Bookmarkable
+
+Names (or aliases to those names) should be simple for users -- ideally,
+user-defined so that if the underlying name is complex the user can
+create an alias that is meaningful to them.
 
 > R-BOOKMARK: A solution SHOULD have a URI that users can Bookmark to create an association
 to a friendly name.
@@ -469,6 +493,10 @@ nickname that is configured by the printer.  Browser extensions
 exist for DNS-SD and mDNS ({{Safari-ext}}, {{Firefox-ext}}).
 
 ## Human-friendly Name
+
+Names (or aliases to those names) should be simple for users -- ideally,
+user-defined so that if the underlying name is complex the user can
+create an alias that is meaningful to them.
 
 > R-CONSISTENT: A solution SHOULD represent these URIs to humans in a
 consistent, readable, and non-confusing fashion.  (In a browser,
