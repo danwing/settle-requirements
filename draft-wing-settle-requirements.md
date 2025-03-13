@@ -184,6 +184,21 @@ informative:
        org: EFF
      target: "https://www.eff.org/https-everywhere"
 
+  w3c-onsp:
+     title: "Open Screen Network Protocol"
+     date: December 2024
+     author:
+       org: W3C
+     target: "https://www.w3.org/TR/openscreen-network/"
+
+  w3c-local-peer:
+     title: "Local Peer-to-Peer API"
+     date: August 2024
+     author:
+       org: W3C WICG
+     target: "https://wicg.github.io/local-peer-to-peer/"
+
+
 --- abstract
 
 When connecting to servers on their local network, users are
@@ -579,6 +594,19 @@ Michael Sweet has proposed a locally-deployed Certification Authority
 W3C worked on this problem from 2017 through 2021 {{w3c-httpslocal}}. More recently,
 W3C had a workshop on the problem in September 2024 {{tpac}}.
 
+W3C has a working draft on OpenScreen Network Protocol {{w3c-onsp}} which
+establish trust between devices for the purposes of media casting and
+remote presentation using DNS-SD, TLS for an initial unauthenticated
+connection, SPAKE2 to validate mutual identity and exchange
+certificates.
+
+W3C WICG also has a working draft on Peer-to-Peer API {{w3c-local-peer}}
+that layers a web API on top of the OpenScreen Network Protocol to
+allow local communication between browsers without the aid of a
+server. It contains proposed APIs for the following on a local
+network: peer advertising, peer discovery and authentication,
+and establishing a WebTransport.
+
 The boundaries of a limited domain -- such as the local domain described in this
 document -- are explored in {{Section 6 of ?RFC8799}}.
 
@@ -617,6 +645,5 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Michael Sweet for his review and feedback.
-
-
+Thanks to Michael Sweet for his review and feedback.  Thanks to
+Michiel De Backker for references to related W3C work.
