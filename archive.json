@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-11T00:39:47.861171+00:00",
+  "timestamp": "2025-03-13T00:40:07.238054+00:00",
   "repo": "danwing/settle-requirements",
   "labels": [
     {
@@ -312,6 +312,58 @@
       "mergeCommit": {
         "oid": "776fa1762ed669703319cf187ebf5e2058e037b2"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDONNWq_86OYYwi",
+      "title": "added W3C OpenScreen Network Protocol and W3C WICG's Peer-to-Peer API to Related Work",
+      "url": "https://github.com/danwing/settle-requirements/pull/9",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-12T17:16:04Z",
+      "updatedAt": "2025-03-12T17:16:04Z",
+      "baseRepository": "danwing/settle-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "776fa1762ed669703319cf187ebf5e2058e037b2",
+      "headRepository": "danwing/settle-requirements",
+      "headRefName": "openscreen",
+      "headRefOid": "72eb46839343e4fbf857a7cb0399ce84dfc3b279",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDONNWq_86OYk3k",
+      "title": "add justification text above each R- requirement",
+      "url": "https://github.com/danwing/settle-requirements/pull/10",
+      "state": "OPEN",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-12T17:38:34Z",
+      "updatedAt": "2025-03-12T17:38:34Z",
+      "baseRepository": "danwing/settle-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "776fa1762ed669703319cf187ebf5e2058e037b2",
+      "headRepository": "danwing/settle-requirements",
+      "headRefName": "add_justification",
+      "headRefOid": "3a3a46e60d0be2daee99e8255bd4203d52947004",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
