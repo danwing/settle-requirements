@@ -5,10 +5,10 @@
 Network Working Group                                            D. Wing
 Internet-Draft                                                    Citrix
 Intended status: Informational                                 E. Nygren
-Expires: 11 September 2025                           Akamai Technologies
+Expires: 14 September 2025                           Akamai Technologies
                                                            M. Richardson
                                                 Sandelman Software Works
-                                                           10 March 2025
+                                                           13 March 2025
 
 
                 Requirements for HTTPS for Local Domains
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 September 2025.
+   This Internet-Draft will expire on 14 September 2025.
 
 Copyright Notice
 
@@ -270,7 +270,13 @@ Table of Contents
 
 3.5.  Multiple Application Protocols
 
+   A solution has to support HTTPS because it is frequently used for
+   device management.
+
       R-HTTPS: A solution MUST support HTTPS.
+
+   Other encrypted protocols are also frequently used on local networks
+   for DNS, file sharing, mail, and telephony.
 
       R-MULT-APP: A solution SHOULD support other application-level
       protocols such as DoT [RFC7858], SMB over QUIC [smb-quic], IMAP
@@ -279,15 +285,23 @@ Table of Contents
 
 3.6.  Cryptographic Agility
 
-      R-AGILITY: A solution SHOULD support crypto agility (such as
-      supporting more than one active key type).
+   A solution has to support moving to new cryptographic functions.
+
+      R-AGILITY: A solution SHOULD support cryptographic agility (such
+      as supporting more than one active key type and different hashes).
 
 3.7.  TLS Server Name Indication
+
+   TLS servers frequently use the TLS SNI [RFC6066] extension to support
+   multiple identities on a single server.
 
       R-TLS-SNI: A solution SHOULD support TLS SNI so a server knows
       which key pair/cert is expected.
 
 3.8.  W3C Private Network Access
+
+   To prevent various attacks, W3C has constrained how browsers operate
+   on private networks
 
       R-PNA: A solution SHOULD integrate well with an evolution of
       [w3c-pna] and both allow for an improved model there but should
@@ -362,10 +376,16 @@ Table of Contents
 
 4.1.  Discoverable
 
+   Most local networks, especially home networks, do not operate their
+   own DNS server.  Many clients already support listening for DNS-SD
+   broadcasts.
+
       R-DISCOVER: A solution SHOULD have a way to do discovery of
       endpoints and their identities (for example, via [DNS-SD]).
 
 4.2.  Easy to Use
+
+   Successful solutions are usually also easy to deploy.
 
       R-EASY: A solution SHOULD have human factors and adversarial
       testing on proposed solutions to make sure that this solution
@@ -373,6 +393,10 @@ Table of Contents
       and does not introduce new security exploitation vectors
 
 4.3.  Bookmarkable
+
+   Names (or aliases to those names) should be simple for users --
+   ideally, user-defined so that if the underlying name is complex the
+   user can create an alias that is meaningful to them.
 
       R-BOOKMARK: A solution SHOULD have a URI that users can Bookmark
       to create an association to a friendly name.
@@ -386,6 +410,10 @@ Table of Contents
       [Firefox-ext]).
 
 4.4.  Human-friendly Name
+
+   Names (or aliases to those names) should be simple for users --
+   ideally, user-defined so that if the underlying name is complex the
+   user can create an alias that is meaningful to them.
 
       R-CONSISTENT: A solution SHOULD represent these URIs to humans in
       a consistent, readable, and non-confusing fashion.  (In a browser,
@@ -579,6 +607,11 @@ Table of Contents
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/rfc/rfc5280>.
+
+   [RFC6066]  Eastlake 3rd, D., "Transport Layer Security (TLS)
+              Extensions: Extension Definitions", RFC 6066,
+              DOI 10.17487/RFC6066, January 2011,
+              <https://www.rfc-editor.org/rfc/rfc6066>.
 
    [RFC7472]  McDonald, I. and M. Sweet, "Internet Printing Protocol
               (IPP) over HTTPS Transport Binding and the 'ipps' URI
