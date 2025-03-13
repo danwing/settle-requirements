@@ -493,6 +493,19 @@ Table of Contents
    More recently, W3C had a workshop on the problem in September 2024
    [tpac].
 
+   W3C has a working draft on OpenScreen Network Protocol [w3c-onsp]
+   which establish trust between devices for the purposes of media
+   casting and remote presentation using DNS-SD, TLS for an initial
+   unauthenticated connection, SPAKE2 to validate mutual identity and
+   exchange certificates.
+
+   W3C WICG also has a working draft on Peer-to-Peer API
+   [w3c-local-peer] that layers a web API on top of the OpenScreen
+   Network Protocol to allow local communication between browsers
+   without the aid of a server.  It contains proposed APIs for the
+   following on a local network: peer advertising, peer discovery and
+   authentication, and establishing a WebTransport.
+
    The boundaries of a limited domain -- such as the local domain
    described in this document -- are explored in Section 6 of [RFC8799].
 
@@ -673,6 +686,13 @@ Table of Contents
               W3C, "HTTPS in Local Network Community Group", 2019,
               <https://github.com/httpslocal>.
 
+   [w3c-local-peer]
+              W3C WICG, "Local Peer-to-Peer API", August 2024,
+              <https://wicg.github.io/local-peer-to-peer/>.
+
+   [w3c-onsp] W3C, "Open Screen Network Protocol", December 2024,
+              <https://www.w3.org/TR/openscreen-network/>.
+
    [w3c-pna]  W3C, "Private Network Access", September 2024,
               <https://wicg.github.io/private-network-access/>.
 
@@ -682,7 +702,8 @@ Table of Contents
 
 Acknowledgments
 
-   Thanks to Michael Sweet for his review and feedback.
+   Thanks to Michael Sweet for his review and feedback.  Thanks to
+   Michiel De Backker for references to related W3C work.
 
 Authors' Addresses
 

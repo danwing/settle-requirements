@@ -1867,27 +1867,38 @@ a server to rotate its key (see <a href="#web-origin" class="auto internal xref"
 <span>[<a href="#I-D.sweet-iot-acme" class="cite xref">I-D.sweet-iot-acme</a>]</span> that can be incrementally deployed.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">W3C worked on this problem from 2017 through 2021 <span>[<a href="#w3c-httpslocal" class="cite xref">w3c-httpslocal</a>]</span>. More recently,
 W3C had a workshop on the problem in September 2024 <span>[<a href="#tpac" class="cite xref">tpac</a>]</span>.<a href="#section-7-4" class="pilcrow">¶</a></p>
-<p id="section-7-5">The boundaries of a limited domain -- such as the local domain described in this
-document -- are explored in <span><a href="https://rfc-editor.org/rfc/rfc8799#section-6" class="relref">Section 6</a> of [<a href="#RFC8799" class="cite xref">RFC8799</a>]</span>.<a href="#section-7-5" class="pilcrow">¶</a></p>
-<p id="section-7-6">The IOTOPS working group and the associated IOT Security Foundation
+<p id="section-7-5">W3C has a working draft on OpenScreen Network Protocol <span>[<a href="#w3c-onsp" class="cite xref">w3c-onsp</a>]</span> which
+establish trust between devices for the purposes of media casting and
+remote presentation using DNS-SD, TLS for an initial unauthenticated
+connection, SPAKE2 to validate mutual identity and exchange
+certificates.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<p id="section-7-6">W3C WICG also has a working draft on Peer-to-Peer API <span>[<a href="#w3c-local-peer" class="cite xref">w3c-local-peer</a>]</span>
+that layers a web API on top of the OpenScreen Network Protocol to
+allow local communication between browsers without the aid of a
+server. It contains proposed APIs for the following on a local
+network: peer advertising, peer discovery and authentication,
+and establishing a WebTransport.<a href="#section-7-6" class="pilcrow">¶</a></p>
+<p id="section-7-7">The boundaries of a limited domain -- such as the local domain described in this
+document -- are explored in <span><a href="https://rfc-editor.org/rfc/rfc8799#section-6" class="relref">Section 6</a> of [<a href="#RFC8799" class="cite xref">RFC8799</a>]</span>.<a href="#section-7-7" class="pilcrow">¶</a></p>
+<p id="section-7-8">The IOTOPS working group and the associated IOT Security Foundation
 <span>[<a href="#iotsf" class="cite xref">iotsf</a>]</span> discussed the problem and some requirements in their white
 paper <span>[<a href="#iotops-suib" class="cite xref">iotops-suib</a>]</span> and presentation to IOTOPS working group at
-IETF112 <span>[<a href="#iotops-suib-prezo" class="cite xref">iotops-suib-prezo</a>]</span>.<a href="#section-7-6" class="pilcrow">¶</a></p>
-<p id="section-7-7">A threshold key system is described and implemented at <span>[<a href="#phb-mesh" class="cite xref">phb-mesh</a>]</span> with the following
-description:<a href="#section-7-7" class="pilcrow">¶</a></p>
+IETF112 <span>[<a href="#iotops-suib-prezo" class="cite xref">iotops-suib-prezo</a>]</span>.<a href="#section-7-8" class="pilcrow">¶</a></p>
+<p id="section-7-9">A threshold key system is described and implemented at <span>[<a href="#phb-mesh" class="cite xref">phb-mesh</a>]</span> with the following
+description:<a href="#section-7-9" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-7-8.1">
-          <p id="section-7-8.1.1">The Mesh is designed to provide users with the highest level of
+<li class="normal ulEmpty" id="section-7-10.1">
+          <p id="section-7-10.1.1">The Mesh is designed to provide users with the highest level of
   security that is possible without asking them to do anything at
   all. For this to become possible, the Mesh will have to be shipped
-  to users as part of the machine Operating System.<a href="#section-7-8.1.1" class="pilcrow">¶</a></p>
+  to users as part of the machine Operating System.<a href="#section-7-10.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-7-9">A summary of the problem and analysis of several solutions
+<p id="section-7-11">A summary of the problem and analysis of several solutions
 (Locally-installed CAs, Plex, WebRTC and WebTransport, TOFU, shared
-secrets) and some drawbacks of those solutions is at <span>[<a href="#stark" class="cite xref">stark</a>]</span>.<a href="#section-7-9" class="pilcrow">¶</a></p>
-<p id="section-7-10">A method using PAKE and a shared secret (displayed on the server) is
-explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a href="#section-7-10" class="pilcrow">¶</a></p>
+secrets) and some drawbacks of those solutions is at <span>[<a href="#stark" class="cite xref">stark</a>]</span>.<a href="#section-7-11" class="pilcrow">¶</a></p>
+<p id="section-7-12">A method using PAKE and a shared secret (displayed on the server) is
+explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a href="#section-7-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -2047,6 +2058,14 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
         <dd>
 <span class="refAuthor">W3C</span>, <span class="refTitle">"HTTPS in Local Network Community Group"</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://github.com/httpslocal">https://github.com/httpslocal</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="w3c-local-peer">[w3c-local-peer]</dt>
+        <dd>
+<span class="refAuthor">W3C WICG</span>, <span class="refTitle">"Local Peer-to-Peer API"</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://wicg.github.io/local-peer-to-peer/">https://wicg.github.io/local-peer-to-peer/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="w3c-onsp">[w3c-onsp]</dt>
+        <dd>
+<span class="refAuthor">W3C</span>, <span class="refTitle">"Open Screen Network Protocol"</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.w3.org/TR/openscreen-network/">https://www.w3.org/TR/openscreen-network/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="w3c-pna">[w3c-pna]</dt>
         <dd>
 <span class="refAuthor">W3C</span>, <span class="refTitle">"Private Network Access"</span>, <time datetime="2024-09" class="refDate">September 2024</time>, <span>&lt;<a href="https://wicg.github.io/private-network-access/">https://wicg.github.io/private-network-access/</a>&gt;</span>. </dd>
@@ -2065,7 +2084,8 @@ explained at <span>[<a href="#shared" class="cite xref">shared</a>]</span>.<a hr
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">Thanks to Michael Sweet for his review and feedback.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">Thanks to Michael Sweet for his review and feedback.  Thanks to
+Michiel De Backker for references to related W3C work.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
