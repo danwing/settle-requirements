@@ -646,7 +646,8 @@ This document has no IANA actions.
 
 ## Changes in -01
 
-* Changed date when this became a recognized problem to 2010 (was 2017).
+* Changed to 2010 (from 2017) when the problem of local domain
+  authentication was first discussed.
 
 * Rather than simple name collision ("printer.local"), discuss how most
   products include the device's (partial) MAC address -- which does help
