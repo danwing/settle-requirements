@@ -573,7 +573,7 @@ both initial and ongoing configuration tasks of various servers
   admin tools)
 
 
-# Related {#related}
+# Related Work {#related}
 
 Martin Thomson wrote HTTPS for Local Domains {{thomson-hld}} which
 covers requirements, discusses several solutions and their tradeoffs,
@@ -642,8 +642,46 @@ This document has no IANA actions.
 
 --- back
 
+# Change History
+
+## Changes in -01
+
+* Changed to 2010 (from 2017) when the problem of local domain
+  authentication was first discussed.
+
+* Rather than simple name collision ("printer.local"), discuss how most
+  products include the device's (partial) MAC address -- which does help
+  distinguishing devices on different networks. Also explain how an attacker
+  can use that name.
+
+* R-AVOID-CENTRAL changed from SHOULD to MUST.
+
+* Justification text added to almost all R- requirements.
+
+* Removed R-LOCALHOST, which had said "localhost" should be handled same
+  as a local domain.  This was removed because localhost is not a unique
+  name causing other problems for a solution.
+
+* R-LOCAL expanded to also cover administratively-defined zone (e.g.,
+  internal.example.com)
+
+* Refined R-STANDALONE.
+
+* Added R-WEB-ORIGIN, and moved key rotation requirement into
+  R-WEB-ORIGIN to say the web origin has to stay the same if the key
+  is rotated.
+
+* Declared TOFU as unacceptable (was a question).
+
+* As Related Work, added: Referee, locally-deployed CA, W3C OpenScreen
+  Network Protocol, W3C WICG Peer-to-Peer API.
+
+* Added pointers to DNS-SD and mDNS extensions for web browsers.
+
+
 # Acknowledgments
 {:numbered="false"}
 
 Thanks to Michael Sweet for his review and feedback.  Thanks to
 Michiel De Backker for references to related W3C work.
+
