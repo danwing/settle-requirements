@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-18T00:39:48.534996+00:00",
+  "timestamp": "2025-03-20T00:39:41.171727+00:00",
   "repo": "danwing/settle-requirements",
   "labels": [
     {
@@ -376,24 +376,26 @@
       "id": "PR_kwDONNWq_86ObTr7",
       "title": "added Change History, renamed 'Related' section to 'Related Work'",
       "url": "https://github.com/danwing/settle-requirements/pull/11",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danwing",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-03-13T01:06:41Z",
-      "updatedAt": "2025-03-13T01:06:41Z",
+      "updatedAt": "2025-03-19T18:13:55Z",
       "baseRepository": "danwing/settle-requirements",
       "baseRefName": "main",
       "baseRefOid": "f93929293b217080661d6a4b81f3ce2367ab754f",
       "headRepository": "danwing/settle-requirements",
       "headRefName": "changes",
-      "headRefOid": "68d67a570e76cd22101c9517c354d75cbcdd7567",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "768efc89f7fbf6c354263c703799c8f29a94e3e4",
+      "closedAt": "2025-03-19T18:13:55Z",
+      "mergedAt": "2025-03-19T18:13:55Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "43ad33580623eef0e036ab2c559bbc242d18ffb8"
+      },
       "comments": [],
       "reviews": []
     }
