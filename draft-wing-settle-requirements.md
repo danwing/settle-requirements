@@ -214,12 +214,17 @@ This document explores requirements for authenticating local servers.
 
 # Introduction
 
-Servers on local networks have historically settled for
-unencrypted communications -- printers, routers, network attached
-storage (NAS).
-However, with the advent of HTTPS everywhere {{everywhere}}, browsers disadvantage unencrypted
-communications (e.g., {{not-secure}}, {{sec-context}}).
-This increases importance of a secure context (HTTPS) to local domains.
+Servers on local networks have historically settled for unencrypted
+communications -- printers, routers, network attached storage (NAS).
+However, with the advent of HTTPS everywhere {{everywhere}}, browsers
+disadvantage unencrypted communications by requiring a secure context
+(generally HTTPS) for features such as Service Workers, Web Bluetooth,
+WebCrypto, WebTransport, and more ({{not-secure}}, {{sec-context}}).
+This increases the importance of a secure context to local domains.
+Some encrypted services are most useful when operated within the local
+domain (e.g., {{?DNR=RFC9463}} with split DNS).  Printers and network
+attached storage on the local domain benefit from encrypted
+communications to improve both integrity and privacy.
 
 In addition, it is recognized that home networks are not (and perhaps have never been) the idyllic secure gardens that many think they are.
 There are persistent threats in the home due to malware on devices within the home, as well as malware that might arrive on guest devices.
