@@ -5,10 +5,10 @@
 Network Working Group                                            D. Wing
 Internet-Draft                                                    Citrix
 Intended status: Informational                                 E. Nygren
-Expires: 20 September 2025                           Akamai Technologies
+Expires: 4 October 2025                              Akamai Technologies
                                                            M. Richardson
                                                 Sandelman Software Works
-                                                           19 March 2025
+                                                            2 April 2025
 
 
                 Requirements for HTTPS for Local Domains
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 September 2025.
+   This Internet-Draft will expire on 4 October 2025.
 
 Copyright Notice
 
@@ -116,9 +116,14 @@ Table of Contents
    Servers on local networks have historically settled for unencrypted
    communications -- printers, routers, network attached storage (NAS).
    However, with the advent of HTTPS everywhere [everywhere], browsers
-   disadvantage unencrypted communications (e.g., [not-secure],
-   [sec-context]).  This increases importance of a secure context
-   (HTTPS) to local domains.
+   disadvantage unencrypted communications by requiring a secure context
+   (generally HTTPS) for features such as Service Workers, Web
+   Bluetooth, WebCrypto, WebTransport, and more ([not-secure],
+   [sec-context]).  This increases the importance of a secure context to
+   local domains.  Some encrypted services are most useful when operated
+   within the local domain (e.g., [DNR] with split DNS).  Printers and
+   network attached storage on the local domain benefit from encrypted
+   communications to improve both integrity and privacy.
 
    In addition, it is recognized that home networks are not (and perhaps
    have never been) the idyllic secure gardens that many think they are.
@@ -553,6 +558,12 @@ Table of Contents
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
 10.2.  Informative References
+
+   [DNR]      Boucadair, M., Ed., Reddy.K, T., Ed., Wing, D., Cook, N.,
+              and T. Jensen, "DHCP and Router Advertisement Options for
+              the Discovery of Network-designated Resolvers (DNR)",
+              RFC 9463, DOI 10.17487/RFC9463, November 2023,
+              <https://www.rfc-editor.org/rfc/rfc9463>.
 
    [DNS-SD]   Cheshire, S. and M. Krochmal, "DNS-Based Service
               Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
