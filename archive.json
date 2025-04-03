@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T00:47:22.866692+00:00",
+  "timestamp": "2025-04-03T00:40:33.150939+00:00",
   "repo": "danwing/settle-requirements",
   "labels": [
     {
@@ -395,6 +395,34 @@
       "mergedBy": "danwing",
       "mergeCommit": {
         "oid": "43ad33580623eef0e036ab2c559bbc242d18ffb8"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDONNWq_86RASbZ",
+      "title": "in introduction: cite specifics of why secure context is useful for HTTPS, and cite specifics why printer and NAS benefit from encryption",
+      "url": "https://github.com/danwing/settle-requirements/pull/12",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-01T23:19:23Z",
+      "updatedAt": "2025-04-02T01:14:36Z",
+      "baseRepository": "danwing/settle-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "43ad33580623eef0e036ab2c559bbc242d18ffb8",
+      "headRepository": "danwing/settle-requirements",
+      "headRefName": "specific_secure_origin",
+      "headRefOid": "d83968c552612cb23d88db951c3bbfbb6453a9ce",
+      "closedAt": "2025-04-02T01:14:36Z",
+      "mergedAt": "2025-04-02T01:14:36Z",
+      "mergedBy": "danwing",
+      "mergeCommit": {
+        "oid": "f00fc5877e33723e9af90b1823d835ed5d4fc642"
       },
       "comments": [],
       "reviews": []
